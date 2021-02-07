@@ -34,7 +34,6 @@ passport.use(new GoogleStrategy({
             })
         }
     })
-
 }))
 
 }
