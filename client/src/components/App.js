@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import { fetchUser } from "../actions";
 import { connect } from "react-redux";
+import {fetchUser} from "../actions";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import CollectResponse from "./CollectResponse";
 import Landing from "./Landing";
 import RenderAdminForm from "./AdminPanel/RenderAdminForm";
-import Responses from "./Responses";
+import Responses from "./AdminPanel/Responses";
 import MyNavbar from "./MyNavbar";
 import SingleResponse from "./AdminPanel/SingleResponse";
 
@@ -24,6 +25,7 @@ class App extends Component {
         <BrowserRouter>
           {/* <MyNavbar /> */}
           <Route exact component={Landing} path="/" />
+          <Route exact component={CollectResponse} path="/form" />
 
           {/* Admin Routes */}
           <Route exact component={Responses} path="/admin" />
