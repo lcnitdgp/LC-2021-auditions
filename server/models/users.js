@@ -10,7 +10,7 @@ const usersSchema = new mongoose.Schema({
         required: true
     },
     responses: {
-        type: Array,
+        type: Object,
         required: false
     },
     isadmin: {
