@@ -15,6 +15,11 @@ export const fetchUser = () => async (dispatch) => {
   console.log(response);
   dispatch({ type: FETCH_USER, payload: response.data });
 };
+export const logOutUser = () => async (dispatch) => {
+  const response = await axios.get(`/auth/logout`);
+  console.log(response);
+  dispatch({ type: FETCH_USER, payload: response.data });
+};
 
 //form routes
 export const createFormElement = (content, type) => async (dispatch) => {
@@ -42,4 +47,13 @@ export const fetchForm = () => async (dispatch) => {
   const response = await axios.get(`/api/questionslist`);
   console.log(response);
   dispatch({ type: FETCH_FORM, payload: response.data.qList });
+};
+
+// responses
+
+export const submitResponse = (userResponse) => async (dispatch) => {
+  console.log("submitting response :",userResponse)
+  const response = await axios.post(`/api/response`,userResponse);
+  console.log(response);
+  dispatch({ type: FETCH_USER, payload: response.data });
 };

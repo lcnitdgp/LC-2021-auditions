@@ -17,8 +17,8 @@ const MONGO_URL = "mongodb://localhost/auditions";
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify : false,
-  useCreateIndex : true
+  useFindAndModify: false,
+  useCreateIndex: true,
 });
 
 app.use(cors()); // Use this after the variable declaration
@@ -52,7 +52,8 @@ const warning = chalk.yellow.bold;
 
 app.get("/auth/logout", function (req, res) {
   req.logout();
-  res.json({ message: "Logged out successfully" });
+  console.log(success("Logged out successfully"));
+  res.json({ authenticated: false, filledForm: false, isadmin: false });
 });
 
 app.get(
@@ -66,17 +67,26 @@ app.get(
   "/auth/google/redirect",
   passport.authenticate("google"),
   (req, res) => {
-    res.json(req.user);
+    console.log("The user has been authenticated");
+    res.redirect(process.env.FRONTEND);
   }
 );
 
 // CHECK AUTHENTICATED //
-
-app.get("/api/current", checkauthentication, (req, res) => {
-  res.json(true);
+app.get("/api/current", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json({
+      authenticated: true,
+      filledForm: req.user.responses ? true : false,
+      isadmin: req.user.isadmin,
+    });
+  } else {
+    res.json({ authenticated: false, filledForm: false, isadmin: false });
+  }
 });
+
 function checkauthentication(req, res, next) {
-  console.log(warning("checking if user is authenticated."), req.user);
+  // console.log(warning("checking if user is authenticated."), req.user);
   if (req.isAuthenticated()) {
     next();
   } else {
@@ -84,7 +94,7 @@ function checkauthentication(req, res, next) {
   }
 }
 function checkAdminAuthentication(req, res, next) {
-  console.log(warning("checking if user is an admin : "), req.user);
+  // console.log(warning("checking if user is an admin : "), req.user);
   if (req.user.isadmin) {
     //req.isAuthenticated() will return true if user is logged in
     next();
@@ -95,16 +105,11 @@ function checkAdminAuthentication(req, res, next) {
 
 // QUESTIONS //
 
-app.get(
-  "/api/questionslist",
-  checkauthentication,
-  checkAdminAuthentication,
-  async (req, res) => {
-    const qList = await questions.find();
-    console.log(success("Fetch All questions:"), qList);
-    res.json({ qList });
-  }
-);
+app.get("/api/questionslist", checkauthentication, async (req, res) => {
+  const qList = await questions.find();
+  // console.log(success("Fetch All questions:"), qList);
+  res.json({ qList });
+});
 
 app.post(
   "/api/questionsadd",
@@ -129,15 +134,19 @@ app.put(
   checkauthentication,
   checkAdminAuthentication,
   async (req, res) => {
-    console.log(warning("The object is being updated:"),req.body,req.body._id);
+    console.log(
+      warning("The object is being updated:"),
+      req.body,
+      req.body._id
+    );
 
     const question = await questions.findByIdAndUpdate(
       req.body._id,
       req.body,
-      {new: true},
+      { new: true },
       (err, docs) => {
         if (err) {
-          console.log(error("Error in updating"),req.user);
+          console.log(error("Error in updating"), req.user);
           res.json({ error: "An error occured while updating." });
         }
       }
@@ -152,92 +161,87 @@ app.delete(
   checkauthentication,
   checkAdminAuthentication,
   async (req, res) => {
-    console.log(warning("The questoins has to be deleted:"),req.body.id);
-    const question = await questions.findByIdAndDelete(req.body.id, (err, docs) => {
-      if (err) {
-        console.log(error("Error in deleting:"), err);
+    console.log(warning("The questoins has to be deleted:"), req.body.id);
+    const question = await questions.findByIdAndDelete(
+      req.body.id,
+      (err, docs) => {
+        if (err) {
+          console.log(error("Error in deleting:"), err);
+        }
       }
-    });
-    console.log(success("The question has been deleted succesfully:"),question);
+    );
+    console.log(
+      success("The question has been deleted succesfully:"),
+      question
+    );
     res.json(req.body.id);
   }
 );
 
 // ADD RESPONSES //
 
-app.post("/api/response", async (req, res) => {
-  await users.findById(req.body.id, async function (err, user) {
-    if (err) {
-      console.log(err);
-      console.log("User Not Found");
-      res.json({ message: "User Not Found" });
-    } else {
-      if (user.responses.length === 0) {
-        await users.findByIdAndUpdate(
-          req.body.id,
-          { responses: req.body.responses },
-          (err, docs) => {
-            if (err) {
-              console.log(err);
-              console.log("Error in updating the form");
-            } else {
-              console.log("Form Successfully Filled");
-              res.json({ message: "Form Successfully Filled" });
-            }
-          }
-        );
-      } else {
-        console.log("Form already filled");
-        res.json({ message: "Form already filled" });
-      }
-    }
-  });
+app.post("/api/response", checkauthentication, async (req, res) => {
+  console.log(req.body);
+  try {
+    const user = await users.findByIdAndUpdate(
+      req.user.id,
+      { responses: req.body },
+      { new: true }
+    );
+    console.log(success("Response has been added:"), user);
+    res.json({
+      authenticated: true,
+      filledForm: true,
+      isadmin: req.user.isadmin,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({ error: "Sorry user could not be added." });
+  }
 });
 
 // VIEW INDIVIDUAL RESPONSES //
 
-app.get("/api/individual", async (req, res) => {
-  await users.findById(req.body.id, async function (err, user) {
-    if (err) {
-      console.log(err);
-      console.log("User Not Found");
-      res.json({ message: "User Not Found" });
-    } else {
-      if (user.isadmin == true) {
-        await users.findById(req.body.uid, async function (error, participant) {
-          if (error) {
-            console.log(error);
-            console.log("Participant not found");
-            res.json({ message: "Participant not found" });
-          } else {
-            res.json({ responses: participant.responses });
-          }
-        });
-      } else {
-        res.json({ message: "Unauthorized User. Access denied." });
+app.get(
+  "/api/individual/:id",
+  checkauthentication,
+  checkAdminAuthentication,
+  async (req, res) => {
+    console.log(req.body, req.params);
+    const { id } = req.params;
+    try {
+      const user = await users.findById(id);
+      console.log(success("The user responses are:"), user);
+      if(user.responses){
+        res.json(user.responses);
+      }else{
+        res.json({ error: "The user has not submitted the form." });
       }
+      
+    } catch (error) {
+      console.log(error);
+      res.json({ error: "An Error Occurred." });
     }
-  });
-});
+  }
+);
 
 // VIEW LIST OF PARTICIPANTS //
 
-app.get("/api/participants", async (req, res) => {
-  await users.findById(req.body.id, async function (err, user) {
-    if (err) {
-      console.log(err);
-      console.log("User Not Found");
-      res.json({ message: "User Not Found" });
-    } else {
-      if (user.isadmin == true) {
-        const uList = await users.find().select("name");
-        res.json({ uList: uList });
-      } else {
-        res.json({ message: "Unauthorized User. Access denied." });
-      }
+app.get(
+  "/api/participants",
+  checkauthentication,
+  checkAdminAuthentication,
+  async (req, res) => {
+    try {
+      const uList = await users.find().select("name isadmin id");
+      console.log(success("The list is:"), uList);
+      res.json({ uList: uList });
+    } catch (error) {
+      console.log(error);
+      res.json({ error: "Sorry Could not fetch User List" });
     }
-  });
-});
+  }
+);
 
 app.listen(PORT, () => {
   console.log("The server is active on :", PORT);

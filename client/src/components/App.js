@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect,Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import {fetchUser} from "../actions";
 
@@ -19,25 +19,50 @@ class App extends Component {
   }
   render() {
     console.log("At the Top");
-
+    if(!this.props.user){
+      return <div>Loading....</div>
+    }
     return (
       <div className="App">
         <BrowserRouter>
-          {/* <MyNavbar /> */}
-          <Route exact component={Landing} path="/" />
-          <Route exact component={CollectResponse} path="/form" />
-
-          {/* Admin Routes */}
-          <Route exact component={Responses} path="/admin" />
-          <Route exact component={SingleResponse} path="/admin/:id" />
-          <Route exact component={RenderAdminForm} path="/admin/form" />
+          <MyNavbar />
+          <Switch>
+            <Route exact component={Landing} path="/" />
+            {/* login Routes */}
+            {this.props.user ? (
+              <>
+                <Route component={CollectResponse} path="/form" />
+                {/* Admin Routes */}
+                {this.props.user.isadmin ? (
+                  <>
+                    <Route exact component={Responses} path="/admin" />
+                    <Route
+                      exact
+                      component={RenderAdminForm}
+                      path="/admin/form"
+                    />
+                    <Route
+                      component={SingleResponse}
+                      path="/admin/responses/:id"
+                    />
+                  </>
+                ) : (
+                  <Redirect to="/" />
+                )}
+              </>
+            ) : (
+              <Redirect to="/" />
+            )}
+          </Switch>
         </BrowserRouter>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  return ({user:state.auth})
+};
 
 const mapDispatchToProps = {
   fetchUser,

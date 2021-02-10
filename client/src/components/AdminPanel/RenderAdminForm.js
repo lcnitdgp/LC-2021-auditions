@@ -11,7 +11,7 @@ class RenderAdminForm extends Component {
     this.props.fetchForm();
   }
   render() {
-    //   console.log("Render admin form.")
+      console.log("Render admin form.")
     return (
       <div>
         <AddFormElements />

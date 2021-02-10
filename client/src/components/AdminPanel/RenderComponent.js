@@ -13,7 +13,7 @@ export default class RenderComponent extends Component {
   }
   renderComponent() {
     const { type, content, options, _id, fields } = this.props.value;
-    console.log(this.props.value, type);
+    // console.log(this.props.value, type);
     if (type === "textarea") {
       return (
         <Form.Group>
@@ -137,7 +137,7 @@ export default class RenderComponent extends Component {
   }
   render() {
     const { image, content } = this.props.value;
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div className="render_component">
         {image ? <img class="image" src={image} /> : ""}

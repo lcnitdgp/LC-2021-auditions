@@ -4,3 +4,6 @@ export const DELETE_FORM_ELEMENT = "DELETE_FORM_ELEMENT";
 export const FETCH_FORM = "FETCH_FORM";
 
 export const FETCH_USER = "FETCH_USER";
+
+export const FETCH_RESPONSE = "FETCH_RESPONSE";
+export const FETCH_RESPONSES = "FETCH_RESPONSES";
