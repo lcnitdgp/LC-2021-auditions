@@ -85,6 +85,33 @@ app.get("/api/current", (req, res) => {
   }
 });
 
+// view profile
+app.get("/api/profile", checkauthentication, (req, res) => {
+  console.log(warning("The user data is :"), req.user);
+  const { name, phone, roll, branch } = req.user;
+  var returnValue = {
+    name: name || "",
+    roll: roll || "",
+    branch: branch || "",
+    phone: phone || "",
+  };
+  console.log(success("The returned value is:"),returnValue);
+  res.json(returnValue);
+});
+
+app.put("/api/profile", checkauthentication, async (req, res) => {
+  try{
+    console.log(warning("The updated value is :"),req.body);
+
+  const newUser = await users.findByIdAndUpdate(req.user.id,req.body,{new:true});
+  console.log(success("New User is :"),newUser);
+  res.json(true);
+  }catch(err){
+    console.log(err);
+    res.json({error:"There has been a error in updation."});
+  }
+});
+
 function checkauthentication(req, res, next) {
   // console.log(warning("checking if user is authenticated."), req.user);
   if (req.isAuthenticated()) {
@@ -212,12 +239,11 @@ app.get(
     try {
       const user = await users.findById(id);
       console.log(success("The user responses are:"), user);
-      if(user.responses){
+      if (user.responses) {
         res.json(user.responses);
-      }else{
+      } else {
         res.json({ error: "The user has not submitted the form." });
       }
-      
     } catch (error) {
       console.log(error);
       res.json({ error: "An Error Occurred." });

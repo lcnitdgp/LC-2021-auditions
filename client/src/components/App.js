@@ -12,6 +12,8 @@ import RenderAdminForm from "./AdminPanel/RenderAdminForm";
 import Responses from "./AdminPanel/Responses";
 import MyNavbar from "./MyNavbar";
 import SingleResponse from "./AdminPanel/SingleResponse";
+import Profile from "./Profile";
+import ProfileEdit from "./ProfileEdit";
 
 class App extends Component {
   componentDidMount() {
@@ -32,6 +34,8 @@ class App extends Component {
             {this.props.user ? (
               <>
                 <Route component={CollectResponse} path="/form" />
+                <Route exact component={Profile} path="/profile" />
+                <Route exact component={ProfileEdit} path="/profile/edit" />
                 {/* Admin Routes */}
                 {this.props.user.isadmin ? (
                   <>

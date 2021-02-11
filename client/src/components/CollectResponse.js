@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { fetchForm, submitResponse } from "../actions";
 import { Form, Col, Row, Button, Modal } from "react-bootstrap";
+import "./CollectResponse.css";
 
 class CollectResponse extends Component {
   constructor(props) {
@@ -79,12 +80,13 @@ class CollectResponse extends Component {
   renderForm() {
     return Object.keys(this.props.form).map((element, index) => {
       // console.log(element);
-      const { type, _id, content, options, fields } = this.props.form[element];
+      const { type, _id, content, options, fields,image } = this.props.form[element];
       // console.log(_id,options);
       // console.log(type, _id, index,this.state.response[_id]);
       if (type === "text") {
         return (
           <Form.Group controlId={`formGroup-${_id}-${index}`} key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
@@ -97,6 +99,7 @@ class CollectResponse extends Component {
       } else if (type === "textarea") {
         return (
           <Form.Group controlId={`formGroup-${_id}-${index}`} key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
@@ -110,6 +113,7 @@ class CollectResponse extends Component {
       } else if (type === "radio") {
         return (
           <Form.Group key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
@@ -132,6 +136,7 @@ class CollectResponse extends Component {
       } else if (type === "checkbox") {
         return (
           <Form.Group key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
@@ -154,6 +159,7 @@ class CollectResponse extends Component {
       } else if (type === "range") {
         return (
           <Form.Group controlId="formBasicRangeCustom" key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
@@ -183,6 +189,7 @@ class CollectResponse extends Component {
         // console.log(this.state.response[_id]);
         return (
           <Form.Group controlId="formBasicRangeCustom" key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
@@ -327,7 +334,7 @@ class CollectResponse extends Component {
       return <div>You have already filled the form</div>
     }
     return (
-      <div>
+      <div class="collect-response">
         {this.renderForm()}
         {this.renderSubmitButton()}
       </div>
