@@ -127,7 +127,7 @@ class EditableComponent extends Component {
         </Form.Group>
         {type === "range" ? (
           <Form.Row>
-            <Form.Group as={Col} controlId="formPlaintextPassword">
+            <Form.Group as={Col}>
               <Form.Label column sm="2">
                 Minimum
               </Form.Label>
@@ -135,7 +135,9 @@ class EditableComponent extends Component {
                 <Form.Control
                   value={element.options[0]}
                   type="Number"
-                  onChange={(e) => this.onFieldOptionsChange(e.target.value,index, 0)}
+                  onChange={(e) =>
+                    this.onFieldOptionsChange(e.target.value, index, 0)
+                  }
                 />
               </Col>
             </Form.Group>
@@ -147,7 +149,9 @@ class EditableComponent extends Component {
                 <Form.Control
                   value={element.options[1]}
                   type="Number"
-                  onChange={(e) => this.onFieldOptionsChange(e.target.value,index, 1)}
+                  onChange={(e) =>
+                    this.onFieldOptionsChange(e.target.value, index, 1)
+                  }
                 />
               </Col>
             </Form.Group>
@@ -156,8 +160,12 @@ class EditableComponent extends Component {
           ""
         )}
         <Form.Group as={Row} controlId="formPlaintype">
-          <Button block variant="outline-danger" onClick={()=>this.onFieldRemoveClick(index)}>
-              Delete
+          <Button
+            block
+            variant="outline-danger"
+            onClick={() => this.onFieldRemoveClick(index)}
+          >
+            Delete
           </Button>
         </Form.Group>
       </div>
@@ -247,7 +255,7 @@ class EditableComponent extends Component {
       // [{type,label,options}]
       return (
         <>
-          <Form.Group as={Row} controlId="formPlaintextEmail">
+          <Form.Group as={Row}>
             <Form.Label column sm="2">
               Sub-Questions
             </Form.Label>
@@ -257,7 +265,7 @@ class EditableComponent extends Component {
               })}
             </Col>
           </Form.Group>
-          <Form.Group as={Row} controlId="formPlaintextEmail">
+          <Form.Group as={Row}>
             <Form.Label column sm="2">
               Add Sub-Question
             </Form.Label>
@@ -318,12 +326,12 @@ class EditableComponent extends Component {
     reader.readAsDataURL(file);
   }
   render() {
-    const { content } = this.state.value;
+    const { content,_id } = this.state.value;
     // console.log(this.state);
     return (
       <div className="EditableComponent">
         <Form>
-          <Form.Group as={Row} controlId="formPlaintextEmail">
+          <Form.Group as={Row} controlId={`formGroup-${_id}`}>
             <Form.Label column sm="2">
               Label
             </Form.Label>
@@ -339,7 +347,7 @@ class EditableComponent extends Component {
               />
             </Col>
           </Form.Group>
-          <Form.Group as={Row} controlId="formPlaintextPassword">
+          <Form.Group as={Row} controlId={`formGroup-${_id}`}>
             <Form.Label column sm="2">
               Image
             </Form.Label>
@@ -353,7 +361,7 @@ class EditableComponent extends Component {
               )}
 
               <Form.File
-                id="custom-file"
+                id={`custom-file-${_id}`}
                 label={this.state.imageLabel}
                 custom
                 accept="image/x-png,image/jpg,image/jpeg"

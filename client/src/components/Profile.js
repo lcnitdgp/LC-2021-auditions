@@ -1,70 +1,69 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import { useHistory, Link } from "react-router-dom";
 // import ProfileFormElement from "./ProfileFormElement";
 
-class Profile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
+function Profile(props) {
+  const [form, setForm] = useState({});
+  let history = useHistory();
+
+  useEffect(() => {
+    let mounted = true;
+    axios
+      .get("/api/profile")
+      .then((response) => {
+        console.log(mounted, response.data);
+        if (mounted) {
+          setForm(response.data);
+        }
+        return null;
+      })
+      .catch((err) => console.log(err));
+    return () => (mounted = false);
+  }, []);
+
+  const arr = Object.keys(form);
+  console.log(arr, form);
+  if (!arr.length) {
+    return <div>Loading...</div>;
   }
-  async componentDidMount() {
-    try {
-      const response = await axios.get("/api/profile");
-      console.log(response.data);
-      this.setState(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  async submitResponse() {
-    await axios.put("/api/profile", this.state.profile);
-  }
-  onChangeValue(element, value) {
-    this.setState({ ...this.state, [element]: value });
-  }
-  handleSubmit = (event) => {
-    event.preventDefault();
-    axios.put('/api/profile',this.state);
-  };
-  capitalizeFirstLetter(string) {
+  const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-  render() {
-    const arr = Object.keys(this.state);
-    if (!arr.length) {
-      return <div>Loading...</div>;
-    }
-    console.log(arr, this.state);
-    return (
-      <div>
-        <Form onSubmit={this.handleSubmit}>
-          {arr.map((element, index) => {
-            console.log(element, this.state[element]);
-            return (
+  };
+
+  return (
+    <div>
+      <>
+        {arr.map((element, index) => {
+          //   console.log(element, form[element]);
+          return (
+            <Col key={index}>
               <Form.Group controlId={element}>
                 <Form.Label>
                   {element === "roll"
                     ? "Roll Number (Preferably Whatsapp)"
-                    : this.capitalizeFirstLetter(element)}
+                    : capitalizeFirstLetter(element)}
                 </Form.Label>
-                <Form.Control
-                  value={this.state[element]}
-                  onChange={(e) => this.onChangeValue(element, e.target.value)}
-                  required
-                />
+                <Col>{form[element]}</Col>
               </Form.Group>
-            );
-          })}
-          <Button type="submit" variant="outline-dark" className="float-right">
-            Next
-          </Button>
-        </Form>
-      </div>
-    );
-  }
+              <hr />
+            </Col>
+          );
+        })}
+        <Link
+          className="btn btn-outline-dark float-right"
+          to={{
+            pathname: "/profile/edit",
+            state: form,
+          }}
+        >
+          Edit
+        </Link>
+      </>
+    </div>
+  );
 }
 
 export default Profile;

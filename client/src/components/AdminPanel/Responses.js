@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import MakeAdminModal from "./MakeAdminModal";
+
 export default class Responses extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +21,11 @@ export default class Responses extends Component {
       console.log(err);
     }
   }
+  onMakeAdmin(index) {
+    let array = [...this.state.list];
+    array[index].isadmin = true;
+    this.setState({ ...this.state, list: array });
+  }
   render() {
     console.log(this.state.list);
     return (
@@ -28,20 +35,20 @@ export default class Responses extends Component {
             console.log(element);
             const { _id, name, isadmin } = element;
             return (
-              <Card>
+              <Card key={index}>
                 <Card.Body>
                   {name}
                   <div className="float-right">
-                    <Button
-                      disabled={isadmin}
-                      variant="outline-primary"
-                      style={{ marginRight: "4px" }}
-                    >
-                      Make Admin
-                    </Button>
+                    <MakeAdminModal
+                      id={_id}
+                      isadmin={isadmin}
+                      name={name}
+                      index={index}
+                      onMakeAdmin={(index)=>this.onMakeAdmin(index)}
+                    />
                     <Link
                       to={`/admin/responses/${_id}`}
-                      className="btn btn-outline-primary"
+                      className="btn btn-outline-dark"
                       role="button"
                     >
                       View Response

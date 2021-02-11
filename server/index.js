@@ -95,20 +95,22 @@ app.get("/api/profile", checkauthentication, (req, res) => {
     branch: branch || "",
     phone: phone || "",
   };
-  console.log(success("The returned value is:"),returnValue);
+  console.log(success("The returned value is:"), returnValue);
   res.json(returnValue);
 });
 
 app.put("/api/profile", checkauthentication, async (req, res) => {
-  try{
-    console.log(warning("The updated value is :"),req.body);
+  try {
+    console.log(warning("The updated value is :"), req.body);
 
-  const newUser = await users.findByIdAndUpdate(req.user.id,req.body,{new:true});
-  console.log(success("New User is :"),newUser);
-  res.json(true);
-  }catch(err){
+    const newUser = await users.findByIdAndUpdate(req.user.id, req.body, {
+      new: true,
+    });
+    console.log(success("New User is :"), newUser);
+    res.json(true);
+  } catch (err) {
     console.log(err);
-    res.json({error:"There has been a error in updation."});
+    res.json({ error: "There has been a error in updation." });
   }
 });
 
@@ -130,6 +132,25 @@ function checkAdminAuthentication(req, res, next) {
   }
 }
 
+//make admin
+app.post(
+  "/api/admin",
+  checkauthentication,
+  checkAdminAuthentication,
+  async (req, res) => {
+    console.log(warning("The user has to be made an admin:"), req.body);
+    try {
+      const user = await users.findByIdAndUpdate(req.body.id,{isadmin:true},{new:true});
+      console.log(success("The user change has been successful"),user)
+      res.json({});
+    } catch (err) {
+      console.log(warning("An error has occurred:"), err);
+      res.json({
+        error: "Sorry the user could not be given admin priveleges.",
+      });
+    }
+  }
+);
 // QUESTIONS //
 
 app.get("/api/questionslist", checkauthentication, async (req, res) => {

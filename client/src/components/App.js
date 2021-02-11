@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Redirect,Switch } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import {fetchUser} from "../actions";
+import { fetchUser } from "../actions";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,42 +21,51 @@ class App extends Component {
   }
   render() {
     console.log("At the Top");
-    if(!this.props.user){
-      return <div>Loading....</div>
+    if (!this.props.user) {
+      return <div>Loading....</div>;
     }
+    console.log(this.props.user);
     return (
       <div className="App">
         <BrowserRouter>
           <MyNavbar />
           <Switch>
-            <Route exact component={Landing} path="/" />
+            <Route exact component={Landing} path="/" user={this.props} />
             {/* login Routes */}
-            {this.props.user ? (
-              <>
-                <Route component={CollectResponse} path="/form" />
-                <Route exact component={Profile} path="/profile" />
-                <Route exact component={ProfileEdit} path="/profile/edit" />
-                {/* Admin Routes */}
-                {this.props.user.isadmin ? (
-                  <>
-                    <Route exact component={Responses} path="/admin" />
-                    <Route
-                      exact
-                      component={RenderAdminForm}
-                      path="/admin/form"
-                    />
-                    <Route
-                      component={SingleResponse}
-                      path="/admin/responses/:id"
-                    />
-                  </>
-                ) : (
-                  <Redirect to="/" />
-                )}
-              </>
+            {this.props.user.authenticated ? (
+              <Route component={CollectResponse} path="/form" />
             ) : (
-              <Redirect to="/" />
+              ""
             )}
+            {this.props.user.authenticated ? (
+              <Route exact component={Profile} path="/profile" />
+            ) : (
+              ""
+            )}
+            {this.props.user.authenticated ? (
+              <Route exact component={ProfileEdit} path="/profile/edit" />
+            ) : (
+              ""
+            )}
+
+            {this.props.user.authenticated && this.props.user.isadmin ? (
+              <Route exact component={Responses} path="/admin" />
+            ) : (
+              ""
+            )}
+
+            {this.props.user.authenticated && this.props.user.isadmin ? (
+              <Route exact component={RenderAdminForm} path="/admin/form" />
+            ) : (
+              ""
+            )}
+
+            {this.props.user.authenticated && this.props.user.isadmin ? (
+              <Route component={SingleResponse} path="/admin/responses/:id" />
+            ) : (
+              ""
+            )}
+            <Redirect to="/" />
           </Switch>
         </BrowserRouter>
       </div>
@@ -65,7 +74,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return ({user:state.auth})
+  return { user: state.auth };
 };
 
 const mapDispatchToProps = {

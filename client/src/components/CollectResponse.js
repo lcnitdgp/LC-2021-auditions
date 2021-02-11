@@ -85,7 +85,7 @@ class CollectResponse extends Component {
       // console.log(type, _id, index,this.state.response[_id]);
       if (type === "text") {
         return (
-          <Form.Group controlId={`formGroup-${_id}-${index}`} key={_id}>
+          <Form.Group controlId={`formGroup-${_id}`} key={_id}>
             {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
@@ -98,7 +98,7 @@ class CollectResponse extends Component {
         );
       } else if (type === "textarea") {
         return (
-          <Form.Group controlId={`formGroup-${_id}-${index}`} key={_id}>
+          <Form.Group controlId={`formGroup-${_id}`} key={_id}>
             {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
@@ -112,7 +112,7 @@ class CollectResponse extends Component {
         );
       } else if (type === "radio") {
         return (
-          <Form.Group key={_id}>
+          <Form.Group key={_id} controlId={`formGroup-${_id}`}>
             {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
@@ -135,7 +135,7 @@ class CollectResponse extends Component {
         );
       } else if (type === "checkbox") {
         return (
-          <Form.Group key={_id}>
+          <Form.Group key={_id} controlId={`formGroup-${_id}`}>
             {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
@@ -158,7 +158,7 @@ class CollectResponse extends Component {
         );
       } else if (type === "range") {
         return (
-          <Form.Group controlId="formBasicRangeCustom" key={_id}>
+          <Form.Group controlId={`formGroup-${_id}`} key={_id}>
             {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
@@ -188,7 +188,7 @@ class CollectResponse extends Component {
       } else if (type === "subquestions") {
         // console.log(this.state.response[_id]);
         return (
-          <Form.Group controlId="formBasicRangeCustom" key={_id}>
+          <Form.Group controlId={`formGroup-${_id}`} key={_id}>
             {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
