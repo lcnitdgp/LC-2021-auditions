@@ -1,9 +1,12 @@
+.Landing {
+  background: ("/dunder.jpg");
+}
 .Landing a {
   -webkit-tap-highlight-color: transparent;
   text-decoration: none;
 }
 .Landing .google-button {
-  cursor : pointer;
+  cursor: pointer;
 }
 .Landing .button {
   display: inline-block;

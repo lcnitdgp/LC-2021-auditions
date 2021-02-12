@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import { useHistory, Redirect } from "react-router-dom";
+import Loader from "./Loader";
 
 function ProfileEdit(props) {
   const [form, setForm] = useState({});
@@ -25,7 +26,7 @@ function ProfileEdit(props) {
 
   if (!arr.length) {
     // console.log("The element is loading.");
-    return <div>Loading...</div>;
+    return <Loader />;;
   }
 
   const onHandleSubmit = async (e) => {

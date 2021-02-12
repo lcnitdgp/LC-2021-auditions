@@ -1,0 +1,8 @@
+.App {
+  min-height: 100vh;
+  overflow: scroll;
+  background-image: url("../images/dunder.jpg");
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

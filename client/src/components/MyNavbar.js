@@ -4,7 +4,7 @@ import { logOutUser } from "../actions";
 import { Button, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import "./MyNavbar.css";
 import { Link } from "react-router-dom";
-
+import lcLogo from "../images/lc.png";
 class MyNavbar extends Component {
   onSignOut() {
     this.props.logOutUser();
@@ -16,7 +16,7 @@ class MyNavbar extends Component {
         <Navbar collapseOnSelect bg="light" expand="sm">
           <Link to="/">
             <Navbar.Brand>
-              <img src="/lc.png" style={{ height: "50px" }} />
+              <img src={lcLogo} style={{ height: "50px" }} />
             </Navbar.Brand>
           </Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

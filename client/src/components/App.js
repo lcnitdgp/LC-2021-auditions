@@ -14,17 +14,18 @@ import MyNavbar from "./MyNavbar";
 import SingleResponse from "./AdminPanel/SingleResponse";
 import Profile from "./Profile";
 import ProfileEdit from "./ProfileEdit";
+import Loader from "./Loader";
+
+// import dunder from "../../public/dunder.jpg";
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
   }
   render() {
-    console.log("At the Top");
     if (!this.props.user) {
-      return <div>Loading....</div>;
+      return <Loader />;
     }
-    console.log(this.props.user);
     return (
       <div className="App">
         <BrowserRouter>

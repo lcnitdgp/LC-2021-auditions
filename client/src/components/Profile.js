@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
+import Loader from "./Loader";
+
 // import ProfileFormElement from "./ProfileFormElement";
 
 function Profile(props) {
@@ -27,7 +29,7 @@ function Profile(props) {
   const arr = Object.keys(form);
   console.log(arr, form);
   if (!arr.length) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
