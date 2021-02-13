@@ -4,19 +4,21 @@ import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import { useHistory, Redirect } from "react-router-dom";
 import Loader from "./Loader";
+import "./ProfileEdit.css";
 
 function ProfileEdit(props) {
   const [form, setForm] = useState({});
   let history = useHistory();
+  console.log(props.location);
   useEffect(() => {
     console.log(props.location.state);
-    if (!props.location.state) {
+    if (props.location && !props.location.state) {
       console.log("api called.");
       axios.get("/api/profile").then((response) => {
         console.log(response.data);
         setForm(response.data);
       });
-    } else {
+    } else if (props.location) {
       setForm(props.location.state);
     }
   }, []);
@@ -45,8 +47,8 @@ function ProfileEdit(props) {
   };
 
   return (
-    <div>
-      <Form onSubmit={onHandleSubmit}>
+    <div className="ProfileEdit">
+      <Form onSubmit={onHandleSubmit} className="">
         {arr.map((element, index) => {
           //   console.log(element, form[element]);
           return (

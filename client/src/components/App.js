@@ -19,6 +19,37 @@ import Loader from "./Loader";
 
 // import dunder from "../../public/dunder.jpg";
 
+const routes = [
+  {
+    component: <Landing />,
+    path: "/",
+  },
+  {
+    component: <CollectResponse />,
+    path: "/form",
+  },
+  {
+    component: <Profile />,
+    path: "/profile",
+  },
+  {
+    component: <ProfileEdit />,
+    path: "/profile/edit",
+  },
+  {
+    component: <Responses />,
+    path: "/admin",
+  },
+  {
+    component: <RenderAdminForm />,
+    path: "/admin/form",
+  },
+  {
+    component: <SingleResponse />,
+    path: "/admin/responses/:id",
+  },
+];
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -48,56 +79,75 @@ class App extends Component {
         </div>
         {!isLoading ? (
           <div ref={this.routes} style={{ opacity: "0" }}>
-            <BrowserRouter>
-              <MyNavbar />
-              <div class="remaining_page">
-                <Switch>
-                  <Route exact component={Landing} path="/" user={this.props} />
-                  {/* login Routes */}
-                  {this.props.user.authenticated ? (
-                    <Route component={CollectResponse} path="/form" />
-                  ) : (
-                    ""
-                  )}
-                  {this.props.user.authenticated ? (
-                    <Route exact component={Profile} path="/profile" />
-                  ) : (
-                    ""
-                  )}
-                  {this.props.user.authenticated ? (
-                    <Route exact component={ProfileEdit} path="/profile/edit" />
-                  ) : (
-                    ""
-                  )}
-
-                  {this.props.user.authenticated && this.props.user.isadmin ? (
-                    <Route exact component={Responses} path="/admin" />
-                  ) : (
-                    ""
-                  )}
-
-                  {this.props.user.authenticated && this.props.user.isadmin ? (
+            <CSSTransition
+              key="location"
+              classNames="fade"
+              timeout={300}
+              appear
+            >
+              <BrowserRouter>
+                <MyNavbar />
+                <div class="remaining_page">
+                  <Switch>
                     <Route
                       exact
-                      component={RenderAdminForm}
-                      path="/admin/form"
+                      component={Landing}
+                      path="/"
+                      user={this.props}
                     />
-                  ) : (
-                    ""
-                  )}
+                    {/* login Routes */}
+                    {this.props.user.authenticated ? (
+                      <Route component={CollectResponse} path="/form" />
+                    ) : (
+                      ""
+                    )}
+                    {this.props.user.authenticated ? (
+                      <Route exact component={Profile} path="/profile" />
+                    ) : (
+                      ""
+                    )}
+                    {this.props.user.authenticated ? (
+                      <Route
+                        exact
+                        component={ProfileEdit}
+                        path="/profile/edit"
+                      />
+                    ) : (
+                      ""
+                    )}
 
-                  {this.props.user.authenticated && this.props.user.isadmin ? (
-                    <Route
-                      component={SingleResponse}
-                      path="/admin/responses/:id"
-                    />
-                  ) : (
-                    ""
-                  )}
-                  <Redirect to="/" />
-                </Switch>
-              </div>
-            </BrowserRouter>
+                    {this.props.user.authenticated &&
+                    this.props.user.isadmin ? (
+                      <Route exact component={Responses} path="/admin" />
+                    ) : (
+                      ""
+                    )}
+
+                    {this.props.user.authenticated &&
+                    this.props.user.isadmin ? (
+                      <Route
+                        exact
+                        component={RenderAdminForm}
+                        path="/admin/form"
+                      />
+                    ) : (
+                      ""
+                    )}
+
+                    {this.props.user.authenticated &&
+                    this.props.user.isadmin ? (
+                      <Route
+                        component={SingleResponse}
+                        path="/admin/responses/:id"
+                      />
+                    ) : (
+                      ""
+                    )}
+                    <Redirect to="/" />
+                  </Switch>
+                </div>
+              </BrowserRouter>
+            </CSSTransition>
           </div>
         ) : null}
       </div>
