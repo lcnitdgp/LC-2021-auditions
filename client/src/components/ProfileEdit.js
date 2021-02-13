@@ -24,11 +24,11 @@ function ProfileEdit(props) {
   }, []);
 
   const arr = Object.keys(form);
-//   console.log(arr, form);
+  //   console.log(arr, form);
 
   if (!arr.length) {
     // console.log("The element is loading.");
-    return <Loader />;;
+    return <Loader />;
   }
 
   const onHandleSubmit = async (e) => {
@@ -45,7 +45,7 @@ function ProfileEdit(props) {
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-
+  console.log(props.location.state);
   return (
     <div className="ProfileEdit">
       <Form onSubmit={onHandleSubmit} className="form_edit">
@@ -68,15 +68,15 @@ function ProfileEdit(props) {
             </Form.Group>
           );
         })}
-        {props.location.state ? (
-          <Button type="submit" variant="outline-dark" className="float-right">
-            Save
-          </Button>
-        ) : (
-          <Button type="submit" variant="outline-dark" className="float-right">
-            Next
-          </Button>
-        )}
+        {
+          <div className="wrap button-edit" onClick={(e) => onHandleSubmit(e)}>
+            <a className="btn">
+              <span className="google_text">
+                {props.location.state ? "SAVE" : "NEXT"}
+              </span>
+            </a>
+          </div>
+        }
       </Form>
     </div>
   );

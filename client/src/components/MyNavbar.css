@@ -10,6 +10,11 @@
 .Navbar .image {
   height: 65px;
 }
+@media only screen and (max-width: 500px) {
+  .Navbar .image {
+      height : 45px;
+  }
+}
 
 .Navbar .menu-bars {
   margin-left: 2rem;

@@ -112,26 +112,28 @@ class CollectResponse extends Component {
         );
       } else if (type === "radio") {
         return (
-          <Form.Group key={_id} controlId={`formGroup-${_id}`}>
-            {image ? <img class="image" src={image} /> : ""}
-            <Form.Label>
-              {index + 1}) {content}
-            </Form.Label>
-            <Col>
-              {options.map((element, index) => {
-                return (
-                  <Form.Check
-                    type={type}
-                    label={element}
-                    name={`radios-${_id}`}
-                    id={`radios-${_id}-${index}`}
-                    key={`${_id}-${index}`}
-                    onChange={() => this.onChangeState(index, _id)}
-                  />
-                );
-              })}
-            </Col>
-          </Form.Group>
+          <div className="form_element">
+            <Form.Group key={_id} controlId={`formGroup-${_id}`}>
+              {image ? <img class="image" src={image} /> : ""}
+              <Form.Label>
+                {index + 1}) {content}
+              </Form.Label>
+              <Col>
+                {options.map((element, index) => {
+                  return (
+                    <Form.Check
+                      type={type}
+                      label={element}
+                      name={`radios-${_id}`}
+                      id={`radios-${_id}-${index}`}
+                      key={`${_id}-${index}`}
+                      onChange={() => this.onChangeState(index, _id)}
+                    />
+                  );
+                })}
+              </Col>
+            </Form.Group>
+          </div>
         );
       } else if (type === "checkbox") {
         return (
@@ -165,7 +167,6 @@ class CollectResponse extends Component {
             </Form.Label>
             <Row>
               <Col xs={8} sm={10}>
-                <Form.Label>Range</Form.Label>
                 <Form.Control
                   type="range"
                   custom
@@ -173,12 +174,13 @@ class CollectResponse extends Component {
                   onChange={(e) => this.onChangeState(e.target.value, _id)}
                   min={options[0]}
                   max={options[1]}
+                  style={{ marginTop: "1rem" }}
                 />
               </Col>
               <Col>
                 <Form.Control
                   value={this.state.response[_id]}
-                  style={{ marginTop: "1rem" }}
+                  style={{ marginTop: "0.5rem" }}
                   readOnly
                 />
               </Col>

@@ -1,0 +1,22 @@
+.Profile {
+  width: 400px;
+}
+
+.button-edit .btn {
+  width: 100%;
+  color: #f8f9fa;
+  border: 4px solid #696863;
+  font-size: 1.15rem;
+  background: #fff9e9;
+  color: #444343;
+}
+.button-edit .wrap .btn:hover {
+  box-shadow: 1px 1px 25px 10px rgb(66 49 25 / 40%);
+  color: rgb(102 102 119);
+}
+@media only screen and (max-width: 400px) {
+  .Profile {
+    width: 300px;
+    font-size: 0.8rem;
+  }
+}

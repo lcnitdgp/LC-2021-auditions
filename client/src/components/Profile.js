@@ -4,7 +4,7 @@ import axios from "axios";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import Loader from "./Loader";
-
+import "./Profile.css";
 // import ProfileFormElement from "./ProfileFormElement";
 
 function Profile(props) {
@@ -36,34 +36,32 @@ function Profile(props) {
   };
 
   return (
-    <div>
-
-        {arr.map((element, index) => {
-          //   console.log(element, form[element]);
-          return (
-            <Col key={index}>
-              <Form.Group controlId={element}>
-                <Form.Label>
-                  {element === "roll"
-                    ? "Roll Number (Preferably Whatsapp)"
-                    : capitalizeFirstLetter(element)}
-                </Form.Label>
-                <Col>{form[element]}</Col>
-              </Form.Group>
-              <hr />
-            </Col>
-          );
-        })}
+    <div class="Profile">
+      {arr.map((element, index) => {
+        //   console.log(element, form[element]);
+        return (
+          <Col key={index}>
+            <Form.Group controlId={element}>
+              {element === "phone"
+                ? "Phone Number"
+                : capitalizeFirstLetter(element)}
+              :{` ${form[element]}`}
+            </Form.Group>
+            <hr />
+          </Col>
+        );
+      })}
+      <div class="wrap button-edit">
         <Link
-          className="btn btn-outline-dark float-right"
+          className="btn"
           to={{
             pathname: "/profile/edit",
             state: form,
           }}
         >
-          Edit
+          <span className="google_text">EDIT</span>
         </Link>
-
+      </div>
     </div>
   );
 }
