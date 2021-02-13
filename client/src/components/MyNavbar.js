@@ -31,6 +31,12 @@ const noAdminSidebarData = [
     icon: <FaIcons.FaCartPlus />,
     cName: "nav-text",
   },
+  {
+    title: "Logout",
+    path: "/",
+    icon: <FaIcons.FaCartPlus />,
+    cName: "nav-text",
+  },
 ];
 
 const adminSidebarData = [
@@ -62,7 +68,7 @@ function MyNavbar(props) {
       : [...noAdminSidebarData]
     : [];
 
-  console.log(user,SidebarData);
+  console.log(user, SidebarData);
   return (
     <div class="Navbar">
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -87,7 +93,12 @@ function MyNavbar(props) {
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
-                  <Link to={item.path}>
+                  <Link
+                    to={item.path}
+                    onClick={(e) => {
+                      if (item.title === "Logout") onSignOut();
+                    }}
+                  >
                     {item.icon}
                     <span>{item.title}</span>
                   </Link>

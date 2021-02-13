@@ -48,7 +48,7 @@ function ProfileEdit(props) {
 
   return (
     <div className="ProfileEdit">
-      <Form onSubmit={onHandleSubmit} className="">
+      <Form onSubmit={onHandleSubmit} className="form_edit">
         {arr.map((element, index) => {
           //   console.log(element, form[element]);
           return (

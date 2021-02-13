@@ -37,7 +37,7 @@ function Profile(props) {
 
   return (
     <div>
-      <>
+
         {arr.map((element, index) => {
           //   console.log(element, form[element]);
           return (
@@ -63,7 +63,7 @@ function Profile(props) {
         >
           Edit
         </Link>
-      </>
+
     </div>
   );
 }
