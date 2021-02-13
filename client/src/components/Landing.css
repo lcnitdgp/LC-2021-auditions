@@ -1,36 +1,272 @@
 .Landing {
   background: ("/dunder.jpg");
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
 }
-.Landing a {
-  -webkit-tap-highlight-color: transparent;
+
+.wrap a {
+  font-size: 1.5rem;
+  padding: 1rem 3rem;
+  color: #f4f4f4;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.wrap .btn {
   text-decoration: none;
+  border: 5px solid #fff9e9;
+  position: relative;
+  overflow: hidden;
+  padding: 6px 15px;
 }
-.Landing .google-button {
+
+.wrap .btn:hover {
+  box-shadow: 1px 1px 25px 10px rgb(66 49 25 / 40%);
+  color: rgb(224 224 224);;
+}
+
+.wrap .google_text{
+  position: relative;
+  top: 2px;
+  font-weight: bold;
+}
+
+.wrap .btn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgb(206 199 189 / 40%),
+    transparent
+  );
+  transition: all 650ms;
+}
+
+.wrap .btn:hover:before {
+  left: 100%;
+}
+
+/* the main join us button */
+.Landing .boton {
+  width: 200px;
+  height: 50px;
+  display: block;
+  position: relative;
   cursor: pointer;
 }
-.Landing .button {
-  display: inline-block;
-  max-width: 300px;
-  margin-top: 50px;
-  border: 0;
-  padding: 0 18px;
-  text-align: left;
+
+.Landing .botontext {
+  position: absolute;
+  height: 100%;
   width: 100%;
-  height: 37px;
-  border-radius: 4px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -moz-font-feature-settings: "liga" on;
-  color: rgba(0, 0, 0, 0.84) !important;
-  fill: rgba(0, 0, 0, 0.84) !important;
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05);
-  font: inherit;
-  outline: none;
+  z-index: 1;
+  text-align: center;
+  line-height: 50px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
 }
-.Landing .button .svgIcon {
-  vertical-align: middle;
-  fill: rgba(0, 0, 0, 0.54);
-  padding-right: 4px;
-  height: 37px;
-  display: inline-block;
+
+.Landing .twist {
+  display: block;
+  height: 100%;
+  width: 25%;
+  position: relative;
+  float: left;
+  margin-left: -4px;
+}
+
+.Landing .twist:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #fed5a9;
+  bottom: 100%;
+  position: absolute;
+  transform-origin: center bottom 0px;
+  transform: matrix3d(1, 0, 0, 0, 0, 0, -1, -0.003, 0, 1, 0, 0, 0, 0, 0, 1);
+
+  -webkit-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -moz-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -o-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995); /* custom */
+}
+
+.Landing .twist:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  height: 100%;
+  background: #9f7f5e;
+  transform-origin: center top 0px;
+  transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.003, 0, -50, 0, 1);
+
+  -webkit-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -moz-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -o-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995); /* custom */
+}
+
+.Landing .boton:hover .twist:before {
+  background: #fff;
+  transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0.003, 0, 50, 0, 1);
+}
+
+.Landing .boton:hover .twist:after {
+  background: #dedae1;
+  transform: matrix3d(1, 0, 0, 0, 0, 0, -1, 0.003, 0, 1, 0, 0, 0, 0, 0, 1);
+}
+
+.Landing .boton .twist:nth-of-type(1) {
+  margin-left: 0;
+}
+
+.Landing .boton .twist:nth-of-type(1):before,
+.Landing .boton .twist:nth-of-type(1):after {
+  transition-delay: 0s;
+}
+
+.Landing .boton .twist:nth-of-type(2):before,
+.Landing .boton .twist:nth-of-type(2):after {
+  transition-delay: 0.1s;
+}
+
+.Landing .boton .twist:nth-of-type(3):before,
+.Landing .boton .twist:nth-of-type(3):after {
+  transition-delay: 0.2s;
+}
+
+.Landing .boton .twist:nth-of-type(4):before,
+.Landing .boton .twist:nth-of-type(4):after {
+  transition-delay: 0.3s;
+}
+
+.Landing .boton .botontext:nth-of-type(1) {
+  color: #3d3b40;
+  bottom: 100%;
+  transform-origin: center bottom 0px;
+  transform: matrix3d(1, 0, 0, 0, 0, 0, -1, -0.003, 0, 1, 0, 0, 0, 0, 0, 1);
+
+  -webkit-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -moz-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -o-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995); /* custom */
+}
+
+.Landing .boton:hover .botontext:nth-of-type(1) {
+  transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0.003, 0, 50, 0, 1);
+}
+
+.Landing .boton .botontext:nth-of-type(2) {
+  color: #fff;
+  top: 100%;
+  transform-origin: center top 0px;
+  transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.003, 0, -50, 0, 1);
+
+  -webkit-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -moz-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -o-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995); /* custom */
+}
+
+.Landing .boton:hover .botontext:nth-of-type(2) {
+  transform: matrix3d(1, 0, 0, 0, 0, 0, -1, 0.003, 0, 1, 0, 0, 0, 0, 0, 1);
+}
+
+/*MENU*/
+
+.Landing .square {
+  border: 1px solid #9f7f5e;
+  height: 26px;
+  width: 26px;
+  display: block;
+  margin: 40px auto;
+  transform: rotate(45deg);
+  overflow: hidden;
+
+  -webkit-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -moz-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -o-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995); /* custom */
+}
+
+.Landing .square .burgerwrap {
+  height: 18px;
+  width: 21px;
+  transform: rotate(-45deg);
+  padding-left: 5px;
+  padding-top: 8px;
+
+  -webkit-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -moz-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -o-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995); /* custom */
+}
+
+.Landing .square:hover {
+  transform: rotate(135deg);
+  border: 1px solid #fff;
+}
+
+.Landing .square:hover .burgerwrap {
+  transform: rotate(-135deg);
+}
+
+.Landing .square span {
+  height: 2px;
+  width: 14px;
+  background: #9f7f5e;
+  display: block;
+  margin-bottom: 2px;
+
+  -webkit-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -moz-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -o-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995); /* custom */
+}
+
+.Landing .square span:after {
+  content: "";
+  height: 2px;
+  width: 14px;
+  position: absolute;
+  background: #fff;
+  left: -19px;
+
+  -webkit-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -moz-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  -o-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
+  transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995); /* custom */
+}
+
+.Landing .square:hover span {
+  margin-left: 26px;
+}
+
+.Landing .square:hover span:after {
+  left: 5px;
+}
+
+.Landing .square span:nth-of-type(1),
+.Landing .square span:nth-of-type(1):after {
+  transition-delay: 0.1s;
+}
+
+.Landing .square span:nth-of-type(2),
+.Landing .square span:nth-of-type(2):after {
+  transition-delay: 0.2s;
+}
+
+.Landing .square span:nth-of-type(3),
+.Landing .square span:nth-of-type(3):after {
+  transition-delay: 0.3s;
 }
