@@ -12,7 +12,7 @@ const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const chalk = require("chalk");
 
-const MONGO_URL = "mongodb://localhost/auditions";
+const MONGO_URL = process.env.MONGO;
 
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
