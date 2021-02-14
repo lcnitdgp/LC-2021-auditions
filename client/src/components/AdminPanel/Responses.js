@@ -33,7 +33,7 @@ export default class Responses extends Component {
       return <Loader />;
     }
     return (
-      <Container style={{ maxWidth: "660px" }}>
+      <Container style={{ maxWidth: "660px" , justifyContent:'flex-start' }} >
         {this.state.list &&
           this.state.list.map((element, index) => {
             console.log(element);

@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { fetchUser } from "../actions";
 import { CSSTransition } from "react-transition-group";
 import officePreLoad from "../images/office_preload.png";
-import formBg from "../images/second.jpg";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";

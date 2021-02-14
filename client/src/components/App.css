@@ -3,13 +3,21 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: url(../images/dunder.jpg) rgb(0 0 0 / 22%);
+  background: url(../images/mobile.jpg) rgb(0 0 0 / 22%);
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: color;
 }
 
+/* till 842 it was fine */
+@media (min-width: 900px) {
+  .App {
+    background: url(../images/large.png) rgb(0 0 0 / 22%);
+    background-size: cover;
+    background-position: center center;
+  }
+}
 .remaining_page {
   flex-grow: 1;
   display: flex;
@@ -168,7 +176,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /*IE & Edge thumb*/
-
 
 .form-group {
   display: flex;
