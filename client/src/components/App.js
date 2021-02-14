@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { fetchUser } from "../actions";
 import { CSSTransition } from "react-transition-group";
 import officePreLoad from "../images/office_preload.png";
+import formBg from "../images/second.jpg";
+
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -71,7 +73,12 @@ class App extends Component {
   render() {
     const isLoading = !this.props.user;
     // console.log("The current state is :", isLoading);
+    const url = window.location.pathname;
+    if(url==='/'){
 
+    }else{
+      
+    }
     return (
       <div className="App">
         <div className="Loader" ref={this.loading}>

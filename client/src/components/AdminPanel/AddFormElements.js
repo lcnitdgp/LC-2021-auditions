@@ -28,7 +28,7 @@ class AddFormElements extends Component {
             return (
               <Col sm={6} md={6}>
                 <Button
-                  variant="secondary"
+                  variant="light"
                   onClick={() => this.onClickHandler(`${element}`)}
                   block
                 >

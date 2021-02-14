@@ -5,6 +5,7 @@ import "./Landing.css";
 import { fetchUser } from "../actions";
 import { Link, useHistory } from "react-router-dom";
 import $ from "jquery";
+import MainText from "./MainText";
 
 function Landing(props) {
   let history = useHistory();
@@ -67,6 +68,7 @@ function Landing(props) {
   // debugger;
   return (
     <div className="Landing">
+      <MainText />
       {!props.user.authenticated ? (
         renderSignUpButton()
       ) : (
