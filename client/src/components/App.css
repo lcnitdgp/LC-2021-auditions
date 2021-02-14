@@ -189,3 +189,7 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   flex-direction: row;
 }
+
+.nav-menu-items::-webkit-scrollbar {
+  display: none;
+}

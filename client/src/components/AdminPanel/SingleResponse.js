@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { fetchForm } from "../../actions";
-import { Form, Col, Row } from "react-bootstrap";
+import { Form, Col, Row,Container } from "react-bootstrap";
 import Loader from "../Loader";
 import "./SingleResponse.css";
 
@@ -11,7 +11,7 @@ class SingleResponse extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      response : {}
+      responses: {},
     };
   }
   async componentDidMount() {
@@ -21,16 +21,18 @@ class SingleResponse extends Component {
       await this.props.fetchForm();
     }
     const id = this.props.match.params.id;
-    const response = await axios.get(`/api/individual/${id}`);
-    console.log(response);
-    this.setState(response.data);
+    const responses = await axios.get(`/api/individual/${id}`);
+    console.log(responses);
+    this.setState(responses.data);
   }
   renderForm() {
     return Object.keys(this.props.form).map((element, index) => {
       // console.log(element);
-      const { type, _id, content, options, fields,image } = this.props.form[element];
+      const { type, _id, content, options, fields, image } = this.props.form[
+        element
+      ];
       // console.log(_id,options);
-      // console.log(type, _id, index,this.state.response[_id]);
+      // console.log(type, _id, index,this.state.responses[_id]);
       if (type === "text") {
         return (
           <Form.Group controlId={`formGroup-${_id}-${index}`} key={_id}>
@@ -38,7 +40,7 @@ class SingleResponse extends Component {
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
-            <Form.Control defaultValue={this.state.response[_id]} />
+            <Form.Control defaultValue={this.state.responses[_id]} />
           </Form.Group>
         );
       } else if (type === "textarea") {
@@ -50,7 +52,7 @@ class SingleResponse extends Component {
             </Form.Label>
             <Form.Control
               as="textarea"
-              defaultValue={this.state.response[_id]}
+              defaultValue={this.state.responses[_id]}
               readOnly
             />
           </Form.Group>
@@ -71,7 +73,7 @@ class SingleResponse extends Component {
                     name={`radios-${_id}`}
                     id={`radios-${_id}-${index}`}
                     key={`${_id}-${index}`}
-                    checked={index === this.state.response[_id]}
+                    checked={index === this.state.responses[_id]}
                     readOnly
                   />
                 );
@@ -95,7 +97,7 @@ class SingleResponse extends Component {
                     name={`radios-${_id}`}
                     id={`radios-${_id}-${index}`}
                     key={`${_id}-${index}`}
-                    checked={this.state.response[_id][index]}
+                    checked={this.state.responses[_id][index]}
                     readOnly
                   />
                 );
@@ -116,7 +118,7 @@ class SingleResponse extends Component {
                 <Form.Control
                   type="range"
                   custom
-                  defaultValue={this.state.response[_id]}
+                  defaultValue={this.state.responses[_id]}
                   disabled
                   min={options[0]}
                   max={options[1]}
@@ -124,7 +126,7 @@ class SingleResponse extends Component {
               </Col>
               <Col>
                 <Form.Control
-                  defaultValue={this.state.response[_id]}
+                  defaultValue={this.state.responses[_id]}
                   style={{ marginTop: "1rem" }}
                 />
               </Col>
@@ -132,7 +134,7 @@ class SingleResponse extends Component {
           </Form.Group>
         );
       } else if (type === "subquestions") {
-        // console.log(this.state.response[_id]);
+        // console.log(this.state.responses[_id]);
         return (
           <Form.Group controlId="formBasicRangeCustom" key={_id}>
             {image ? <img class="image" src={image} /> : ""}
@@ -152,7 +154,7 @@ class SingleResponse extends Component {
                             {index + 1}){content}
                           </Form.Label>
                           <Form.Control
-                            defaultValue={this.state.response[_id][index]}
+                            defaultValue={this.state.responses[_id][index]}
                           />
                         </Form.Group>
                       </Col>
@@ -168,7 +170,7 @@ class SingleResponse extends Component {
                           </Form.Label>
                           <Form.Control
                             as={type}
-                            defaultValue={this.state.response[_id][index]}
+                            defaultValue={this.state.responses[_id][index]}
                           />
                         </Form.Group>
                       </Col>
@@ -188,14 +190,14 @@ class SingleResponse extends Component {
                               custom
                               min={options[0]}
                               max={options[1]}
-                              defaultValue={this.state.response[_id][index]}
+                              defaultValue={this.state.responses[_id][index]}
                               disabled
                             />
                           </Col>
                           <Col>
                             <Form.Control
                               style={{ marginTop: "1rem" }}
-                              defaultValue={this.state.response[_id][index]}
+                              defaultValue={this.state.responses[_id][index]}
                             />
                           </Col>
                         </Form.Group>
@@ -210,13 +212,64 @@ class SingleResponse extends Component {
       }
     });
   }
+  capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  renderInfo() {
+    const { name, phone, branch, email, photo, roll } = this.state;
+    const arr = [
+      { name },
+      { phone },
+      { roll },
+      { branch },
+      { email },
+      { photo },
+    ];
+    console.log(arr);
 
+    return (
+      <Form>
+        {arr.map((element, index) => {
+          const elem = Object.keys(element)[0];
+          console.log(element, elem);
+          return (
+            <Form.Group>
+              <Form.Label>
+                <p className="form-main-heading">
+                  {this.capitalizeFirstLetter(elem)}
+                </p>
+                <div className="form-main-body">
+                  {elem === "photo" ? (
+                    <img src={element[elem]} className="response_image" />
+                  ) : (
+                    <p>{element[elem]}</p>
+                  )}
+                </div>
+              </Form.Label>
+            </Form.Group>
+          );
+        })}
+      </Form>
+    );
+  }
   render() {
-    console.log("single form called",this.state);
-    if (Object.keys(this.state.response).length === 0) {
+    console.log("single form called", this.state);
+    if (this.state.error) {
+      return <div className="form-group">{this.state.error}</div>;
+    }
+    if (Object.keys(this.state.responses).length === 0) {
       return <Loader />;
     }
-    return <div className="single-response">{this.renderForm()}</div>;
+    return (
+      <div className="single-response">
+        <Container>
+          <div className="main_heading">Personal Information</div>
+          {this.renderInfo()}
+          <div className="main_heading">Response</div>
+          {this.renderForm()}
+        </Container>
+      </div>
+    );
   }
 }
 

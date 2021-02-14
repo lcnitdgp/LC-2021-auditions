@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { fetchUser } from "../actions";
 import { CSSTransition } from "react-transition-group";
 import officePreLoad from "../images/office_preload.png";
-
+import "./Particles.js";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -17,6 +17,7 @@ import SingleResponse from "./AdminPanel/SingleResponse";
 import Profile from "./Profile";
 import ProfileEdit from "./ProfileEdit";
 import Loader from "./Loader";
+import Particles from "./Particles.js";
 
 // import dunder from "../../public/dunder.jpg";
 
@@ -71,8 +72,10 @@ class App extends Component {
 
   render() {
     const isLoading = !this.props.user;
+  
     return (
       <div className="App">
+        <Particles />
         <div className="Loader" ref={this.loading}>
           <img class="image_loader" src={officePreLoad} />
         </div>

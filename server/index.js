@@ -285,9 +285,9 @@ app.get(
     const { id } = req.params;
     try {
       const user = await users.findById(id);
-      console.log(success("The user responses are:"), user);
       if (user.responses) {
-        res.json({ ...user, response: user.responses });
+        console.log(success("The user responses are:"), user);
+        res.json(user);
       } else {
         res.json({ error: "The user has not submitted the form." });
       }

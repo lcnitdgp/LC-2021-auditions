@@ -5,3 +5,25 @@
   margin: 0 auto;
   margin-bottom: 20px;
 }
+.single-response .main_heading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: white;
+  font-style: italic;
+  font-weight: bolder;
+}
+
+.single-response .response_image {
+  margin: 0 auto;
+}
+
+.single-response .form-main-heading {
+  font-weight: bold;
+  font-style: italic;
+  text-align: center;
+}
+.single-response .form-main-body {
+  display: flex;
+  justify-content: center;
+  padding-top: 13px;
+}

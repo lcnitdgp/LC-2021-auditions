@@ -4,6 +4,7 @@ import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 // import ProfileFormElement from "./ProfileFormElement";
+import "./ProfileFormElement.css";
 
 function ProfileEdit(props) {
   const [form, setForm] = useState({});
@@ -23,8 +24,8 @@ function ProfileEdit(props) {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     console.log(form);
-    await axios.put("/api/profile",form);
-    history.push('/form')
+    await axios.put("/api/profile", form);
+    history.push("/form");
   };
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
