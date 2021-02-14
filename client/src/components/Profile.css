@@ -22,7 +22,13 @@
   }
 }
 
-.edit_form_element{
-  display:flex;
-  flex-direction: row;
+.edit_form_element {
+  display: flex;
+  flex-direction: column;
+}
+
+.Profile .profile_photo {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
 }

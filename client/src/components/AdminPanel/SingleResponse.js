@@ -5,12 +5,13 @@ import axios from "axios";
 import { fetchForm } from "../../actions";
 import { Form, Col, Row } from "react-bootstrap";
 import Loader from "../Loader";
+import "./SingleResponse.css";
 
 class SingleResponse extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      response: {},
+      response : {}
     };
   }
   async componentDidMount() {
@@ -22,26 +23,28 @@ class SingleResponse extends Component {
     const id = this.props.match.params.id;
     const response = await axios.get(`/api/individual/${id}`);
     console.log(response);
-    this.setState({ response: response.data });
+    this.setState(response.data);
   }
   renderForm() {
     return Object.keys(this.props.form).map((element, index) => {
       // console.log(element);
-      const { type, _id, content, options, fields } = this.props.form[element];
+      const { type, _id, content, options, fields,image } = this.props.form[element];
       // console.log(_id,options);
       // console.log(type, _id, index,this.state.response[_id]);
       if (type === "text") {
         return (
           <Form.Group controlId={`formGroup-${_id}-${index}`} key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
-            <Form.Control defaultValue={this.state.response[_id]} readOnly />
+            <Form.Control defaultValue={this.state.response[_id]} />
           </Form.Group>
         );
       } else if (type === "textarea") {
         return (
           <Form.Group controlId={`formGroup-${_id}-${index}`} key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
@@ -55,6 +58,7 @@ class SingleResponse extends Component {
       } else if (type === "radio") {
         return (
           <Form.Group key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
@@ -78,6 +82,7 @@ class SingleResponse extends Component {
       } else if (type === "checkbox") {
         return (
           <Form.Group key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
@@ -101,6 +106,7 @@ class SingleResponse extends Component {
       } else if (type === "range") {
         return (
           <Form.Group controlId="formBasicRangeCustom" key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
@@ -120,7 +126,6 @@ class SingleResponse extends Component {
                 <Form.Control
                   defaultValue={this.state.response[_id]}
                   style={{ marginTop: "1rem" }}
-                  readOnly
                 />
               </Col>
             </Row>
@@ -130,6 +135,7 @@ class SingleResponse extends Component {
         // console.log(this.state.response[_id]);
         return (
           <Form.Group controlId="formBasicRangeCustom" key={_id}>
+            {image ? <img class="image" src={image} /> : ""}
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
@@ -147,7 +153,6 @@ class SingleResponse extends Component {
                           </Form.Label>
                           <Form.Control
                             defaultValue={this.state.response[_id][index]}
-                            readOnly
                           />
                         </Form.Group>
                       </Col>
@@ -164,7 +169,6 @@ class SingleResponse extends Component {
                           <Form.Control
                             as={type}
                             defaultValue={this.state.response[_id][index]}
-                            readOnly
                           />
                         </Form.Group>
                       </Col>
@@ -192,7 +196,6 @@ class SingleResponse extends Component {
                             <Form.Control
                               style={{ marginTop: "1rem" }}
                               defaultValue={this.state.response[_id][index]}
-                              readOnly
                             />
                           </Col>
                         </Form.Group>
@@ -213,7 +216,7 @@ class SingleResponse extends Component {
     if (Object.keys(this.state.response).length === 0) {
       return <Loader />;
     }
-    return <div>{this.renderForm()}</div>;
+    return <div className="single-response">{this.renderForm()}</div>;
   }
 }
 

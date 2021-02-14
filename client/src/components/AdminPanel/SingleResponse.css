@@ -1,0 +1,7 @@
+.single-response .image {
+  max-width: 40vw;
+  max-height: 35vh;
+  object-fit: contain;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}

@@ -50,7 +50,6 @@ const warning = chalk.yellow.bold;
 
 // AUTH //
 
-
 app.get("/auth/logout", function (req, res) {
   req.logout();
   console.log(success("Logged out successfully"));
@@ -288,7 +287,7 @@ app.get(
       const user = await users.findById(id);
       console.log(success("The user responses are:"), user);
       if (user.responses) {
-        res.json(user.responses);
+        res.json({ ...user, response: user.responses });
       } else {
         res.json({ error: "The user has not submitted the form." });
       }

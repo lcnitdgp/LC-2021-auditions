@@ -12,6 +12,7 @@ class CollectResponse extends Component {
     this.state = {
       response: {},
       show: false,
+      loading : false,
     };
   }
 
@@ -293,10 +294,13 @@ class CollectResponse extends Component {
   onClickModal() {
     this.setState({ ...this.state, show: !this.state.show });
   }
-  onSubmit() {
-    this.props.submitResponse(this.state.response);
+
+  async onSubmit() {
+    this.setState({ ...this.state, loading: true });
+    await this.props.submitResponse(this.state.response);
+    window.location.reload();
   }
-  renderSubmitButton() {
+  renderSubmitButton = () => {
     return (
       <>
         <div
@@ -327,8 +331,9 @@ class CollectResponse extends Component {
               variant="outline-dark"
               block
               onClick={() => this.onSubmit()}
+              disabled={this.state.loading}
             >
-              SUBMIT
+              {this.state.loading?`Loading,,,`:`SUBMIT`}
             </Button>
           </Modal.Footer>
         </Modal>
@@ -341,19 +346,22 @@ class CollectResponse extends Component {
     );
   }
   render() {
-    console.log(this.state, this.props.user, "Form Opened.");
+    // console.log(this.state, this.props.user, "Form Opened.");
     if (!Object.keys(this.state.response).length) {
       return <Loader />;
     };
+    // console.log(this.props.user.filledForm);
     if (this.props.user.filledForm) {
       return <div className="collect-response">{this.submittedForm()}</div>;
     }
     return (
       <Container style={{ maxWidth: "700px" }}>
-        <div class="collect-response">
-          {this.renderForm()}
-          {this.renderSubmitButton()}
-        </div>
+        <Form onSubmit>
+          <div class="collect-response">
+            {this.renderForm()}
+            {this.renderSubmitButton()}
+          </div>
+        </Form>
       </Container>
     );
   }

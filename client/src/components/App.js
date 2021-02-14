@@ -72,13 +72,6 @@ class App extends Component {
 
   render() {
     const isLoading = !this.props.user;
-    // console.log("The current state is :", isLoading);
-    const url = window.location.pathname;
-    if(url==='/'){
-
-    }else{
-      
-    }
     return (
       <div className="App">
         <div className="Loader" ref={this.loading}>
