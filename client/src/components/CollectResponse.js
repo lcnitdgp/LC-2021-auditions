@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { fetchForm, submitResponse } from "../actions";
-import { Form, Col, Row, Button, Modal } from "react-bootstrap";
+import { Form, Col, Row, Button, Modal, Container } from "react-bootstrap";
 import "./CollectResponse.css";
+import Loader from "./Loader";
 
 class CollectResponse extends Component {
   constructor(props) {
@@ -80,7 +81,9 @@ class CollectResponse extends Component {
   renderForm() {
     return Object.keys(this.props.form).map((element, index) => {
       // console.log(element);
-      const { type, _id, content, options, fields,image } = this.props.form[element];
+      const { type, _id, content, options, fields, image } = this.props.form[
+        element
+      ];
       // console.log(_id,options);
       // console.log(type, _id, index,this.state.response[_id]);
       if (type === "text") {
@@ -195,7 +198,7 @@ class CollectResponse extends Component {
             <Form.Label>
               {index + 1}) {content}
             </Form.Label>
-            <div style={{ marginLeft: "1rem" }}>
+            <div style={{ marginLeft: "0.1rem" }}>
               {fields.map(({ content, type, options }, index) => {
                 // console.log(content, type, options);
 
@@ -296,50 +299,62 @@ class CollectResponse extends Component {
   renderSubmitButton() {
     return (
       <>
-        <Button
-          block
-          variant="outline-dark"
+        <div
+          className="wrap button-edit"
           onClick={() => this.onClickModal()}
+          style={{ marginBottom: "2rem" }}
         >
-          Submit
-        </Button>
+          <a className="btn">
+            <span className="google_text">SUBMIT</span>
+          </a>
+        </div>
         <Modal
           show={this.state.show}
           onHide={() => this.onClickModal()}
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Confirm Submission</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Body>
+            <div className="horizontally_center_items">
+              <p>Are you sure you want to submit the form ?</p>
+              <p>P.S - Once Submitted , your response cannot be edited .</p>
+            </div>
+          </Modal.Body>
           <Modal.Footer>
             <Button
               variant="outline-dark"
               block
               onClick={() => this.onSubmit()}
             >
-              Submit
+              SUBMIT
             </Button>
           </Modal.Footer>
         </Modal>
       </>
     );
   }
+  submittedForm() {
+    return (
+      <div className="form-group submitted">You Have Submitted The Form :)</div>
+    );
+  }
   render() {
-    console.log(this.state,this.props.user,"Form Opened.");
+    console.log(this.state, this.props.user, "Form Opened.");
     if (!Object.keys(this.state.response).length) {
-      // still filling response details
-      // console.log(this.state.response, "The current state.");
-      return <div>Loading....</div>;
-    }
-    if(this.props.user.filledForm){
-      return <div>You have already filled the form</div>
+      return <Loader />;
+    };
+    if (this.props.user.filledForm) {
+      return <div className="collect-response">{this.submittedForm()}</div>;
     }
     return (
-      <div class="collect-response">
-        {this.renderForm()}
-        {this.renderSubmitButton()}
-      </div>
+      <Container style={{ maxWidth: "700px" }}>
+        <div class="collect-response">
+          {this.renderForm()}
+          {this.renderSubmitButton()}
+        </div>
+      </Container>
     );
   }
 }

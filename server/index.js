@@ -50,10 +50,17 @@ const warning = chalk.yellow.bold;
 
 // AUTH //
 
+
 app.get("/auth/logout", function (req, res) {
   req.logout();
   console.log(success("Logged out successfully"));
-  res.json({ authenticated: false, filledForm: false, isadmin: false });
+  res.json({
+    authenticated: false,
+    filledForm: false,
+    isadmin: false,
+    image: null,
+    name: null,
+  });
 });
 
 app.get(
@@ -79,9 +86,17 @@ app.get("/api/current", (req, res) => {
       authenticated: true,
       filledForm: req.user.responses ? true : false,
       isadmin: req.user.isadmin,
+      image: req.user.photo,
+      name: req.user.name,
     });
   } else {
-    res.json({ authenticated: false, filledForm: false, isadmin: false });
+    res.json({
+      authenticated: false,
+      filledForm: false,
+      isadmin: false,
+      image: null,
+      name: null,
+    });
   }
 });
 
@@ -107,7 +122,13 @@ app.put("/api/profile", checkauthentication, async (req, res) => {
       new: true,
     });
     console.log(success("New User is :"), newUser);
-    res.json(true);
+    res.json({
+      authenticated: true,
+      filledForm: newUser.responses ? true : false,
+      isadmin: newUser.isadmin,
+      image: newUser.photo,
+      name: newUser.name,
+    });
   } catch (err) {
     console.log(err);
     res.json({ error: "There has been a error in updation." });
@@ -115,7 +136,7 @@ app.put("/api/profile", checkauthentication, async (req, res) => {
 });
 
 function checkauthentication(req, res, next) {
-  // console.log(warning("checking if user is authenticated."), req.user);
+  console.log(warning("checking if user is authenticated."), req.user);
   if (req.isAuthenticated()) {
     next();
   } else {
@@ -140,8 +161,12 @@ app.post(
   async (req, res) => {
     console.log(warning("The user has to be made an admin:"), req.body);
     try {
-      const user = await users.findByIdAndUpdate(req.body.id,{isadmin:true},{new:true});
-      console.log(success("The user change has been successful"),user)
+      const user = await users.findByIdAndUpdate(
+        req.body.id,
+        { isadmin: true },
+        { new: true }
+      );
+      console.log(success("The user change has been successful"), user);
       res.json({});
     } catch (err) {
       console.log(warning("An error has occurred:"), err);
@@ -155,7 +180,7 @@ app.post(
 
 app.get("/api/questionslist", checkauthentication, async (req, res) => {
   const qList = await questions.find();
-  // console.log(success("Fetch All questions:"), qList);
+  console.log(success("Fetch All questions:"), qList);
   res.json({ qList });
 });
 
@@ -239,8 +264,10 @@ app.post("/api/response", checkauthentication, async (req, res) => {
     console.log(success("Response has been added:"), user);
     res.json({
       authenticated: true,
-      filledForm: true,
+      filledForm: req.user.responses ? true : false,
       isadmin: req.user.isadmin,
+      image: req.user.photo,
+      name: req.user.name,
     });
   } catch (error) {
     console.log(error);

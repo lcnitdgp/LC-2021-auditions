@@ -25,10 +25,10 @@
 
 .wrap .btn:hover {
   box-shadow: 1px 1px 25px 10px rgb(66 49 25 / 40%);
-  color: rgb(224 224 224);;
+  color: rgb(224 224 224);
 }
 
-.wrap .google_text{
+.wrap .google_text {
   position: relative;
   top: 2px;
   font-weight: bold;
@@ -60,7 +60,6 @@
   height: 50px;
   display: block;
   position: relative;
-  cursor: pointer;
 }
 
 .Landing .botontext {
@@ -71,7 +70,7 @@
   text-align: center;
   line-height: 50px;
   font-family: "Montserrat", sans-serif;
-  font-size: 12px;
+  font-size: 0.9rem;
   text-transform: uppercase;
 }
 

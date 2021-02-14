@@ -5,13 +5,14 @@ import { Form, Button } from "react-bootstrap";
 import { useHistory, Redirect } from "react-router-dom";
 import Loader from "./Loader";
 import "./ProfileEdit.css";
+import { updateUser } from "../actions";
 
 function ProfileEdit(props) {
   const [form, setForm] = useState({});
   let history = useHistory();
-  console.log(props.location);
+  // console.log(props.location);
   useEffect(() => {
-    console.log(props.location.state);
+    // console.log(props.location.state);
     if (props.location && !props.location.state) {
       console.log("api called.");
       axios.get("/api/profile").then((response) => {
@@ -33,8 +34,8 @@ function ProfileEdit(props) {
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(form);
-    await axios.put("/api/profile", form);
+    console.log("changing user.");
+    await props.updateUser(form);
     if (props.location.state) {
       // has come from existing profile
       history.push("/profile");
@@ -45,7 +46,7 @@ function ProfileEdit(props) {
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-  console.log(props.location.state);
+  // console.log(props.location.state);
   return (
     <div className="ProfileEdit">
       <Form onSubmit={onHandleSubmit} className="form_edit">
@@ -54,9 +55,9 @@ function ProfileEdit(props) {
           return (
             <Form.Group controlId={element} key={index}>
               <Form.Label>
-                {element === "roll"
-                  ? "Roll Number (Preferably Whatsapp)"
-                  : capitalizeFirstLetter(element)}
+                {element === "phone"
+                  ? "Phone Number (Preferably Whatsapp)"
+                  : (element==='roll'?"Roll Number":capitalizeFirstLetter(element))}
               </Form.Label>
               <Form.Control
                 value={form[element]}
@@ -85,4 +86,7 @@ function ProfileEdit(props) {
 const mapStateToProps = (auth) => {
   return { auth };
 };
-export default connect(mapStateToProps, null)(ProfileEdit);
+const mapDispatchToProps = {
+  updateUser,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileEdit);

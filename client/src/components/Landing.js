@@ -70,14 +70,17 @@ function Landing(props) {
       {!props.user.authenticated ? (
         renderSignUpButton()
       ) : (
-        <a
-          onClick={(e) => {
-            setTimeout(() => history.push("/profile/edit"), 1000);
-          }}
-          class="boton"
-        >
-          Join Us
-        </a>
+        <>
+          <a
+            onClick={(e) => {
+              console.log("Clicked.");
+              setTimeout(() => history.push("/profile/edit"), 1000);
+            }}
+            className="boton"
+          >
+            Join Us
+          </a>
+        </>
       )}
     </div>
   );

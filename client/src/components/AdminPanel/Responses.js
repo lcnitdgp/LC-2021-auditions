@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MakeAdminModal from "./MakeAdminModal";
+import Loader from "../Loader";
 
 export default class Responses extends Component {
   constructor(props) {
@@ -28,23 +29,26 @@ export default class Responses extends Component {
   }
   render() {
     console.log(this.state.list);
+    if (!this.state.list) {
+      return <Loader />;
+    }
     return (
-      <div>
+      <Container style={{ maxWidth: "660px" }}>
         {this.state.list &&
           this.state.list.map((element, index) => {
             console.log(element);
             const { _id, name, isadmin } = element;
             return (
-              <Card key={index}>
-                <Card.Body>
-                  {name}
-                  <div className="float-right">
+              <div className="element_card form-group" key={index}>
+                <div className="element_card_body">
+                  {`${index + 1}) ${name}`}
+                  <div className="element_card_buttons float-right">
                     <MakeAdminModal
                       id={_id}
                       isadmin={isadmin}
                       name={name}
                       index={index}
-                      onMakeAdmin={(index)=>this.onMakeAdmin(index)}
+                      onMakeAdmin={(index) => this.onMakeAdmin(index)}
                     />
                     <Link
                       to={`/admin/responses/${_id}`}
@@ -54,11 +58,11 @@ export default class Responses extends Component {
                       View Response
                     </Link>
                   </div>
-                </Card.Body>
-              </Card>
+                </div>
+              </div>
             );
           })}
-      </div>
+      </Container>
     );
   }
 }

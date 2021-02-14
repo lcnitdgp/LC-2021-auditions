@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { fetchForm } from "../../actions";
 import { Form, Col, Row } from "react-bootstrap";
+import Loader from "../Loader";
+
 class SingleResponse extends Component {
   constructor(props) {
     super(props);
@@ -208,11 +210,8 @@ class SingleResponse extends Component {
 
   render() {
     console.log("single form called",this.state);
-    if (this.state.response.error) {
-      return <div>{this.state.response.error}</div>;
-    }
     if (Object.keys(this.state.response).length === 0) {
-      return <div>Loading</div>;
+      return <Loader />;
     }
     return <div>{this.renderForm()}</div>;
   }

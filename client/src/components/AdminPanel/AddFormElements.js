@@ -1,8 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button } from "react-bootstrap";
-import {createFormElement} from "../../actions";
+import { Button,Row,Col } from "react-bootstrap";
+import { createFormElement } from "../../actions";
+import "./AddFormElements.css";
+
 const defaultLabel = "Please Add A Question Label";
+
+const buttonElements = [
+  "radio",
+  "checkbox",
+  "subquestions",
+  "text",
+  "textarea",
+  "range",
+];
 
 class AddFormElements extends Component {
   onClickHandler(type) {
@@ -11,40 +22,22 @@ class AddFormElements extends Component {
 
   render() {
     return (
-      <div>
-        <Button
-          variant="secondary"
-          onClick={() => this.onClickHandler("radio")}
-        >
-          Radio
-        </Button>
-        <Button
-          variant="secondary"
-          onClick={() => this.onClickHandler("checkbox")}
-        >
-          Checkbox
-        </Button>
-        <Button
-          variant="secondary"
-          onClick={() => this.onClickHandler("subquestions")}
-        >
-          Subquestions
-        </Button>
-        <Button variant="secondary" onClick={() => this.onClickHandler("text")}>
-          Text
-        </Button>
-        <Button
-          variant="secondary"
-          onClick={() => this.onClickHandler("textarea")}
-        >
-          Textarea
-        </Button>
-        <Button
-          variant="secondary"
-          onClick={() => this.onClickHandler("range")}
-        >
-          Range
-        </Button>
+      <div class="add-form-elements">
+        <Row>
+          {buttonElements.map((element, index) => {
+            return (
+              <Col sm={6} md={6}>
+                <Button
+                  variant="secondary"
+                  onClick={() => this.onClickHandler(`${element}`)}
+                  block
+                >
+                  {element}
+                </Button>
+              </Col>
+            );
+          })}
+        </Row>
       </div>
     );
   }

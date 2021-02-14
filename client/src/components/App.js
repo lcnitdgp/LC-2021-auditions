@@ -59,18 +59,18 @@ class App extends Component {
 
   async componentDidMount() {
     await this.props.fetchUser();
-    console.log("The user has been called:", this.props.user);
+    // console.log("The user has been called:", this.props.user);
     this.loading.current.classList.add("loading");
     setTimeout(() => {
       this.loading.current.style.display = "none";
-      console.log("removed.");
+      // console.log("removed.");
       this.routes.current.classList.add("main_part");
     }, 1000);
   }
 
   render() {
     const isLoading = !this.props.user;
-    console.log("The current state is :", isLoading);
+    // console.log("The current state is :", isLoading);
 
     return (
       <div className="App">

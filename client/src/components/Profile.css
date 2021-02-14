@@ -14,9 +14,15 @@
   box-shadow: 1px 1px 25px 10px rgb(66 49 25 / 40%);
   color: rgb(102 102 119);
 }
+
 @media only screen and (max-width: 400px) {
   .Profile {
     width: 300px;
     font-size: 0.8rem;
   }
+}
+
+.edit_form_element{
+  display:flex;
+  flex-direction: row;
 }

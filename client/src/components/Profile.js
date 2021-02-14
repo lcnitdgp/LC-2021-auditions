@@ -16,7 +16,7 @@ function Profile(props) {
     axios
       .get("/api/profile")
       .then((response) => {
-        console.log(mounted, response.data);
+        // console.log(mounted, response.data);
         if (mounted) {
           setForm(response.data);
         }
@@ -27,7 +27,7 @@ function Profile(props) {
   }, []);
 
   const arr = Object.keys(form);
-  console.log(arr, form);
+  // console.log(arr, form);
   if (!arr.length) {
     return <Loader />;
   }
@@ -39,13 +39,17 @@ function Profile(props) {
     <div class="Profile">
       {arr.map((element, index) => {
         //   console.log(element, form[element]);
+        const Name = `${capitalizeFirstLetter(element)}${
+          element === "roll" || element === "phone" ? " Number" : ""
+        }:`;
+        // console.log(Name,form[element]);
         return (
           <Col key={index}>
             <Form.Group controlId={element}>
-              {element === "phone"
-                ? "Phone Number"
-                : capitalizeFirstLetter(element)}
-              :{` ${form[element]}`}
+              <div className="edit_form_element">
+                <div className="title">{Name}</div>
+                <div className="main_name">{form[element]}</div>
+              </div>
             </Form.Group>
             <hr />
           </Col>
