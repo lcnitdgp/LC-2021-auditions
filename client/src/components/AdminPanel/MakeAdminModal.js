@@ -32,8 +32,17 @@ function MakeAdminModal(props) {
             block
             variant="outline-dark"
             onClick={async () => {
-              console.log(props.id,props.index);
-              await axios.post("/api/admin", {id:props.id});
+              console.log(props.id, props.index);
+              const header = {
+                headers: {
+                  "x-auth-token": localStorage.getItem("token"),
+                },
+              };
+              await axios.post(
+                `${process.env.REACT_APP_BACKEND_URL}/api/admin`,
+                { id: props.id },
+                header
+              );
               props.onMakeAdmin(props.index);
               handleClose();
             }}
