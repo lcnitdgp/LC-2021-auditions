@@ -7,7 +7,7 @@ import {
 } from "./types";
 import axiosConfig from "../config/axios";
 import axios from "axios";
-const backendUrl = "https://lc-auditions-backend.herokuapp.com";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 var header = {
   headers: {

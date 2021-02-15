@@ -7,17 +7,18 @@ import Loader from "./Loader";
 import "./Profile.css";
 // import ProfileFormElement from "./ProfileFormElement";
 
-const header = {
-  headers: {
-    "x-auth-token": localStorage.getItem("token"),
-  },
-};
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 function Profile(props) {
   const [form, setForm] = useState({});
   let history = useHistory();
   console.log("The header is : ",header)
+  const header = {
+      headers: {
+        "x-auth-token": localStorage.getItem("token"),
+      },
+  };
+
   useEffect(() => {
     let mounted = true;
     axios

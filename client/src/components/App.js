@@ -61,9 +61,10 @@ class App extends Component {
 
   async componentDidMount() {
     const token = new URLSearchParams(window.location.search).get("token");
-    console.log(token);
-    if (token) {
-      localStorage.setItem("token", token);
+    console.log("The new token:",token);
+    console.log("Already stored token",localStorage.getItem("token"));
+    if(token){
+      localStorage.setItem('token',token);
     }
     await this.props.fetchUser();
     // console.log("The user has been called:", this.props.user);

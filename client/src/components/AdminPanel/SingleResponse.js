@@ -27,6 +27,11 @@ class SingleResponse extends Component {
       await this.props.fetchForm();
     }
     const id = this.props.match.params.id;
+     const header = {
+       headers: {
+         "x-auth-token": localStorage.getItem("token"),
+       },
+     };
     const responses = await axios.get(`/api/individual/${id}`,header);
     console.log(responses);
     this.setState(responses.data);
