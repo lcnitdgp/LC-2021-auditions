@@ -7,6 +7,12 @@ import { Form, Col, Row,Container } from "react-bootstrap";
 import Loader from "../Loader";
 import "./SingleResponse.css";
 
+const header = {
+  headers: {
+    "x-auth-token": localStorage.getItem("token"),
+  },
+};
+
 class SingleResponse extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +27,7 @@ class SingleResponse extends Component {
       await this.props.fetchForm();
     }
     const id = this.props.match.params.id;
-    const responses = await axios.get(`/api/individual/${id}`);
+    const responses = await axios.get(`/api/individual/${id}`,header);
     console.log(responses);
     this.setState(responses.data);
   }

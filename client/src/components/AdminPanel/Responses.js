@@ -5,6 +5,13 @@ import { Link } from "react-router-dom";
 import MakeAdminModal from "./MakeAdminModal";
 import Loader from "../Loader";
 
+const header = {
+  headers: {
+    "x-auth-token": localStorage.getItem("token"),
+  },
+};
+
+
 export default class Responses extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +22,7 @@ export default class Responses extends Component {
   }
   async componentDidMount() {
     try {
-      const response = await axios.get("/api/participants");
+      const response = await axios.get("/api/participants",header);
       //   console.log(response.data);
       this.setState({ ...this.state, list: response.data.uList });
     } catch (err) {

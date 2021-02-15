@@ -7,6 +7,12 @@ import Loader from "./Loader";
 import "./ProfileEdit.css";
 import { updateUser } from "../actions";
 
+const header = {
+  headers: {
+    "x-auth-token": localStorage.getItem("token"),
+  },
+};
+
 function ProfileEdit(props) {
   const [form, setForm] = useState({});
   let history = useHistory();
@@ -15,7 +21,7 @@ function ProfileEdit(props) {
     // console.log(props.location.state);
     if (props.location && !props.location.state) {
       console.log("api called.");
-      axios.get("/api/profile").then((response) => {
+      axios.get("/api/profile", header).then((response) => {
         console.log(response.data);
         setForm(response.data);
       });
@@ -57,7 +63,9 @@ function ProfileEdit(props) {
               <Form.Label>
                 {element === "phone"
                   ? "Phone Number (Preferably Whatsapp)"
-                  : (element==='roll'?"Roll Number":capitalizeFirstLetter(element))}
+                  : element === "roll"
+                  ? "Roll Number"
+                  : capitalizeFirstLetter(element)}
               </Form.Label>
               <Form.Control
                 value={form[element]}

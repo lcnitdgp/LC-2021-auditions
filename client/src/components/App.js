@@ -68,6 +68,14 @@ class App extends Component {
       // console.log("removed.");
       this.routes.current.classList.add("main_part");
     }, 1000);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+    console.log(token);
+    if(token)
+    {
+      localStorage.setItem("token",token);
+    }
   }
 
   render() {

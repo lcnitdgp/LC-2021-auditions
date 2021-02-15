@@ -7,14 +7,20 @@ import Loader from "./Loader";
 import "./Profile.css";
 // import ProfileFormElement from "./ProfileFormElement";
 
+const header = {
+  headers: {
+    "x-auth-token": localStorage.getItem("token"),
+  },
+};
+
 function Profile(props) {
   const [form, setForm] = useState({});
   let history = useHistory();
-
+  console.log("The header is : ",header)
   useEffect(() => {
     let mounted = true;
     axios
-      .get("/api/profile")
+      .get("/api/profile",header)
       .then((response) => {
         // console.log(mounted, response.data);
         if (mounted) {

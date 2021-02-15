@@ -75,13 +75,16 @@ app.get(
   passport.authenticate("google"),
   (req, res) => {
     console.log("The user has been authenticated");
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    res.redirect(process.env.FRONTEND);
+    const token = jwt.sign(req.user.id, process.env.SECRET);
+    console.log(success("The user has been authenticated:"), token);
+    res.redirect(`${process.env.FRONTEND}?token=${token}`);
   }
 );
 
 // CHECK AUTHENTICATED //
 app.get("/api/current", (req, res) => {
+  console.log(success("In fetching the token is:"), req.header("x-auth-token"));
+
   if (req.isAuthenticated()) {
     const def = {
       authenticated: true,
@@ -121,7 +124,6 @@ app.get("/api/profile", checkauthentication, (req, res) => {
 app.put("/api/profile", checkauthentication, async (req, res) => {
   try {
     console.log(warning("The updated value is :"), req.body);
-
     const newUser = await users.findByIdAndUpdate(req.user.id, req.body, {
       new: true,
     });
@@ -139,16 +141,38 @@ app.put("/api/profile", checkauthentication, async (req, res) => {
   }
 });
 
-function checkauthentication(req, res, next) {
-  console.log(warning("checking if user is authenticated."), req.user);
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.json({ error: "Please Login To The Website." });
+async function checkauthentication(req, res, next) {
+  try {
+    const token = req.header("x-auth-token");
+    console.log(warning("IN MIDDLEWARE The token is :", token));
+    if (!token) {
+      console.log("No token");
+      res.json({ error: "Sorry please be authenitcated." });
+    }
+    const verified = jwt.verify(token, process.env.SECRET);
+
+    console.log(verified);
+    if (!verified)
+      res
+        .status(401)
+        .json({ error: "Token verification failed, authorization denied" });
+
+    const user = await users.findById(verified);
+
+    console.log(user);
+    if (user) {
+      req.user = user;
+      next();
+    } else {
+      res.status(401).json({ error: "The User does not exist." });
+    }
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 }
 function checkAdminAuthentication(req, res, next) {
-  // console.log(warning("checking if user is an admin : "), req.user);
+  console.log(warning("checking if user is an admin : "), req.user);
   if (req.user.isadmin) {
     //req.isAuthenticated() will return true if user is logged in
     next();
