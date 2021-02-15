@@ -18,7 +18,8 @@ function Profile(props) {
         "x-auth-token": localStorage.getItem("token"),
       },
   };
-
+  console.log("The new header is:",header);
+  console.log("Header is:",header);
   useEffect(() => {
     let mounted = true;
     axios

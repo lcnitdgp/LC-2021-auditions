@@ -7,11 +7,6 @@ import Loader from "./Loader";
 import "./ProfileEdit.css";
 import { updateUser } from "../actions";
 
-const header = {
-  headers: {
-    "x-auth-token": localStorage.getItem("token"),
-  },
-};
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -19,6 +14,13 @@ function ProfileEdit(props) {
   const [form, setForm] = useState({});
   let history = useHistory();
   // console.log(props.location);
+  const header = {
+    headers: {
+      "x-auth-token": localStorage.getItem("token"),
+    },
+  };
+  console.log("The new header is:",header);
+  console.log("Header is:",header;
   useEffect(() => {
     // console.log(props.location.state);
     if (props.location && !props.location.state) {
