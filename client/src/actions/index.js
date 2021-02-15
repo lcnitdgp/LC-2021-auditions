@@ -9,7 +9,7 @@ import axiosConfig from "../config/axios";
 import axios from "axios";
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-const header = {
+var header = {
   headers: {
     "x-auth-token": localStorage.getItem("token"),
   },
@@ -19,6 +19,11 @@ const header = {
 export const fetchUser = () => async (dispatch) => {
   console.log(backendUrl);
   console.log(process.env);
+  header = {
+    headers: {
+      "x-auth-token": localStorage.getItem("token"),
+    },
+  };
   const response = await axios.get(`${backendUrl}/api/current`, header);
   console.log(header);
   console.log(response);

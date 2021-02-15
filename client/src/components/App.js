@@ -60,6 +60,11 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    const token = new URLSearchParams(window.location.search).get("token");
+    console.log(token);
+    if (token) {
+      localStorage.setItem("token", token);
+    }
     await this.props.fetchUser();
     // console.log("The user has been called:", this.props.user);
     this.loading.current.classList.add("loading");
@@ -68,18 +73,11 @@ class App extends Component {
       // console.log("removed.");
       this.routes.current.classList.add("main_part");
     }, 1000);
-
-    const token = new URLSearchParams(window.location.search).get("token");
-    console.log(token);
-    if(token)
-    {
-      localStorage.setItem("token",token);
-    }
   }
 
   render() {
     const isLoading = !this.props.user;
-  
+
     return (
       <div className="App">
         <Particles />
