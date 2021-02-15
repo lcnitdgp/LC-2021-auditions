@@ -6,10 +6,10 @@
   width: 50%;
   text-align: center;
   color: white;
-  color: black;
 }
 
 .form-component .nav-link.active {
   background-color: #f9f4ef;
   border-color: transparent;
+  color: black
 }

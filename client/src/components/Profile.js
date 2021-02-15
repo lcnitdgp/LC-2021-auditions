@@ -38,13 +38,11 @@ function Profile(props) {
   console.log(user);
   return (
     <div class="Profile">
-      <Row>
-        <Col md={3} lg={2}>
+        <Col>
           <div className="profile_photo">
             <img src={user.image} className="photo" />
           </div>
         </Col>
-        <Col md={9} lg={10}>
           {arr.map((element, index) => {
             //   console.log(element, form[element]);
             const Name = `${capitalizeFirstLetter(element)}${
@@ -79,8 +77,6 @@ function Profile(props) {
               <span className="google_text">EDIT</span>
             </Link>
           </div>
-        </Col>
-      </Row>
     </div>
   );
 }

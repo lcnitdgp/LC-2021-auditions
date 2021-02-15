@@ -90,16 +90,16 @@ class EditableComponent extends Component {
       },
     });
   }
-  onFieldRemoveClick(index){
-      const newFields = [...this.state.value.fields];
-      newFields.splice(index,1);
-      this.setState({
-        ...this.state,
-        value: {
-          ...this.state.value,
-          fields: newFields,
-        },
-      });
+  onFieldRemoveClick(index) {
+    const newFields = [...this.state.value.fields];
+    newFields.splice(index, 1);
+    this.setState({
+      ...this.state,
+      value: {
+        ...this.state.value,
+        fields: newFields,
+      },
+    });
   }
   renderSubQuestionField(element, index) {
     const { type } = element;
@@ -226,28 +226,33 @@ class EditableComponent extends Component {
       const { options } = this.state.value;
 
       return (
-        <Form.Row>
-          <Form.Group as={Col}>
-            <Form.Label as="legend" sm={2}>
-              Minimum Value
-            </Form.Label>
-            <Form.Control
-              value={options[0]}
-              type="Number"
-              onChange={(e) => this.onChangeOptionName(e.target.value, 0)}
-            />
-          </Form.Group>
-          <Form.Group as={Col}>
-            <Form.Label as="legend">Maximum Value</Form.Label>
-            <Form.Control
-              value={options[1]}
-              type="Number"
-              onChange={(e) => {
-                this.onChangeOptionName(e.target.value, 1);
-              }}
-            />
-          </Form.Group>
-        </Form.Row>
+        <Form.Group as={Row}>
+          <Form.Label as="legend" column sm={2}>
+            Options
+          </Form.Label>
+          <Row sm={10}>
+            <Form.Group as={Col}>
+              <Form.Label as="legend" column >
+                Minimum Value
+              </Form.Label>
+              <Form.Control
+                value={options[0]}
+                type="Number"
+                onChange={(e) => this.onChangeOptionName(e.target.value, 0)}
+              />
+            </Form.Group>
+            <Form.Group as={Col}>
+              <Form.Label column as="legend">Maximum Value</Form.Label>
+              <Form.Control
+                value={options[1]}
+                type="Number"
+                onChange={(e) => {
+                  this.onChangeOptionName(e.target.value, 1);
+                }}
+              />
+            </Form.Group>
+          </Row>
+        </Form.Group>
       );
     } else {
       // type of subquestion :
@@ -306,7 +311,7 @@ class EditableComponent extends Component {
     this.props.deleteFormElement(this.state.value._id);
   }
   onClickSave() {
-      console.log(this.state.value);
+    console.log(this.state.value);
     this.props.editFormElement(this.state.value);
   }
   onFileUpload(e) {
@@ -326,7 +331,7 @@ class EditableComponent extends Component {
     reader.readAsDataURL(file);
   }
   render() {
-    const { content,_id } = this.state.value;
+    const { content, _id } = this.state.value;
     // console.log(this.state);
     return (
       <div className="EditableComponent">

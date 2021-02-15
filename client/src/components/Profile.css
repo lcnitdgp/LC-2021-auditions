@@ -1,5 +1,5 @@
 .Profile {
-  width: 400px;
+  width: 500px;
 }
 
 .button-edit .btn {
@@ -15,9 +15,9 @@
   color: rgb(102 102 119);
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
   .Profile {
-    width: 300px;
+    width: 350px;
     font-size: 0.8rem;
   }
 }
@@ -42,5 +42,17 @@
 @media (min-width: 768px) {
   .Profile .photo {
     margin-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .Profile {
+    width: 300px;
+    font-size: 0.7rem;
+  }
+  .Profile .photo {
+    border-radius: 50%;
+    transform: scale(1.1);
+    border: 2px groove rgb(235, 221, 197);
   }
 }
