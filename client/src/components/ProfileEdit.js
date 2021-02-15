@@ -13,7 +13,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 function ProfileEdit(props) {
   const [form, setForm] = useState({});
   let history = useHistory();
-  // console.log(props.locaton)
+  // console.log(props.location)
   const header = {
     headers: {
       "x-auth-token": localStorage.getItem("token"),
