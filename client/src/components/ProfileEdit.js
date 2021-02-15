@@ -20,7 +20,7 @@ function ProfileEdit(props) {
     },
   };
   console.log("The new header is:",header);
-  console.log("Header is:",header;
+  console.log("Header is:",header);
   useEffect(() => {
     // console.log(props.location.state);
     if (props.location && !props.location.state) {
