@@ -32,7 +32,7 @@ class SingleResponse extends Component {
          "x-auth-token": localStorage.getItem("token"),
        },
      };
-    const responses = await axios.get(`/api/individual/${id}`,header);
+    const responses = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/individual/${id}`,header);
     console.log(responses);
     this.setState(responses.data);
   }

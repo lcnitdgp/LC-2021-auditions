@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import MakeAdminModal from "./MakeAdminModal";
 import Loader from "../Loader";
 
-
 export default class Responses extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +21,10 @@ export default class Responses extends Component {
         },
       };
 
-      const response = await axios.get("/api/participants",header);
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/participants`,
+        header
+      );
       //   console.log(response.data);
       this.setState({ ...this.state, list: response.data.uList });
     } catch (err) {
@@ -40,7 +42,7 @@ export default class Responses extends Component {
       return <Loader />;
     }
     return (
-      <Container style={{ maxWidth: "660px" , justifyContent:'flex-start' }} >
+      <Container style={{ maxWidth: "660px", justifyContent: "flex-start" }}>
         {this.state.list &&
           this.state.list.map((element, index) => {
             console.log(element);
