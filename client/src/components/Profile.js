@@ -12,12 +12,13 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 function Profile(props) {
   const [form, setForm] = useState({});
   let history = useHistory();
-  console.log("The header is : ",header)
+  
   const header = {
       headers: {
         "x-auth-token": localStorage.getItem("token"),
       },
   };
+  console.log("The header is : ", header);
   console.log("The new header is:",header);
   console.log("Header is:",header);
   useEffect(() => {

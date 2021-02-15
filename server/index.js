@@ -75,8 +75,8 @@ app.get(
   passport.authenticate("google"),
   (req, res) => {
     console.log("The user has been authenticated");
-    const token = jwt.sign(req.user.id, process.env.SECRET, {
-      expiresIn: "5d",
+    const token = jwt.sign({id:req.user.id}, process.env.SECRET, {
+      expiresIn: '5d'
     });
     console.log(success("The user has been authenticated:"), token);
     res.redirect(`${process.env.FRONTEND}?token=${token}`);
@@ -105,7 +105,7 @@ app.get("/api/current", async (req, res) => {
     console.log(verified);
     if (!verified) return res.json(notAuthenticated);
 
-    const user = await users.findById(verified);
+    const user = await users.findById(verified.id);
     console.log(user);
 
     if (user) {
@@ -175,7 +175,7 @@ async function checkauthentication(req, res, next) {
         .status(401)
         .json({ error: "Token verification failed, authorization denied" });
 
-    const user = await users.findById(verified);
+    const user = await users.findById(verified.id);
 
     console.log(user);
     if (user) {
