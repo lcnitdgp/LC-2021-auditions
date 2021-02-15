@@ -12,6 +12,7 @@ const header = {
     "x-auth-token": localStorage.getItem("token"),
   },
 };
+const backendUrl = proces.env.BACKEND_URL || "http://localhost:5000";
 
 function Profile(props) {
   const [form, setForm] = useState({});
@@ -20,7 +21,7 @@ function Profile(props) {
   useEffect(() => {
     let mounted = true;
     axios
-      .get("/api/profile",header)
+      .get(`${backendUrl}/api/profile`,header)
       .then((response) => {
         // console.log(mounted, response.data);
         if (mounted) {
