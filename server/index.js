@@ -11,6 +11,7 @@ require("./passport/passportgoogle")(passport);
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const chalk = require("chalk");
+const jwt = require("jsonwebtoken");
 
 const MONGO_URL = process.env.MONGO;
 
@@ -74,6 +75,7 @@ app.get(
   passport.authenticate("google"),
   (req, res) => {
     console.log("The user has been authenticated");
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     res.redirect(process.env.FRONTEND);
   }
 );
@@ -81,14 +83,17 @@ app.get(
 // CHECK AUTHENTICATED //
 app.get("/api/current", (req, res) => {
   if (req.isAuthenticated()) {
-    res.json({
+    const def = {
       authenticated: true,
       filledForm: req.user.responses ? true : false,
       isadmin: req.user.isadmin,
       image: req.user.photo,
       name: req.user.name,
-    });
+    };
+    console.log("The return value is :", def);
+    res.json(def);
   } else {
+    console.log("The current user is not authenticated:", req.user);
     res.json({
       authenticated: false,
       filledForm: false,
@@ -315,6 +320,19 @@ app.get(
     }
   }
 );
+
+if (process.env.NODE_ENV === "production") {
+  //only in prod version
+  //if route for a particular route not recognized on server side
+  //then check in client side
+  app.use(express.static("client/build"));
+  //Express will serve up the index.html file
+  //if it dosent recognize the route even on  client side
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 app.listen(PORT, () => {
   console.log("The server is active on :", PORT);
