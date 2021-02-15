@@ -75,7 +75,9 @@ app.get(
   passport.authenticate("google"),
   (req, res) => {
     console.log("The user has been authenticated");
-    const token = jwt.sign(req.user.id, process.env.SECRET);
+    const token = jwt.sign(req.user.id, process.env.SECRET, {
+      expiresIn: "5d",
+    });
     console.log(success("The user has been authenticated:"), token);
     res.redirect(`${process.env.FRONTEND}?token=${token}`);
   }
