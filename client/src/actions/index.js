@@ -7,7 +7,7 @@ import {
 } from "./types";
 import axiosConfig from "../config/axios";
 import axios from "axios";
-const backendUrl = proces.env.BACKEND_URL || "http://localhost:5000";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const header = {
   headers: {
@@ -17,6 +17,8 @@ const header = {
 
 // auth routes
 export const fetchUser = () => async (dispatch) => {
+  console.log(backendUrl);
+  console.log(process.env);
   const response = await axios.get(`${backendUrl}/api/current`, header);
   console.log(header);
   console.log(response);

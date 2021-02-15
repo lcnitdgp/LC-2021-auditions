@@ -12,7 +12,7 @@ const header = {
     "x-auth-token": localStorage.getItem("token"),
   },
 };
-const backendUrl = proces.env.BACKEND_URL || "http://localhost:5000";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 function Profile(props) {
   const [form, setForm] = useState({});

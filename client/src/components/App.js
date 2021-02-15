@@ -69,8 +69,7 @@ class App extends Component {
       this.routes.current.classList.add("main_part");
     }, 1000);
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token");
+    const token = new URLSearchParams(window.location.search).get("token");
     console.log(token);
     if(token)
     {

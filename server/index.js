@@ -82,28 +82,44 @@ app.get(
 );
 
 // CHECK AUTHENTICATED //
-app.get("/api/current", (req, res) => {
-  console.log(success("In fetching the token is:"), req.header("x-auth-token"));
+app.get("/api/current", async (req, res) => {
+  const notAuthenticated = {
+    authenticated: false,
+    filledForm: false,
+    isadmin: false,
+    image: null,
+    name: null,
+  };
 
-  if (req.isAuthenticated()) {
-    const def = {
-      authenticated: true,
-      filledForm: req.user.responses ? true : false,
-      isadmin: req.user.isadmin,
-      image: req.user.photo,
-      name: req.user.name,
-    };
-    console.log("The return value is :", def);
-    res.json(def);
-  } else {
-    console.log("The current user is not authenticated:", req.user);
-    res.json({
-      authenticated: false,
-      filledForm: false,
-      isadmin: false,
-      image: null,
-      name: null,
-    });
+  try {
+    const token = req.header("x-auth-token");
+    console.log(warning("In CURRENT the token is :"), token);
+    if (!token || token === "null") {
+      console.log("No token:", notAuthenticated);
+      return res.json(notAuthenticated);
+    }
+    console.log("Seeing");
+    const verified = jwt.verify(token, process.env.SECRET);
+    console.log(verified);
+    if (!verified) return res.json(notAuthenticated);
+
+    const user = await users.findById(verified);
+    console.log(user);
+
+    if (user) {
+      req.user = user;
+      return res.status(200).json({
+        authenticated: true,
+        filledForm: req.user.responses ? true : false,
+        isadmin: req.user.isadmin,
+        image: req.user.photo,
+        name: req.user.name,
+      });
+    } else {
+      return res.json(notAuthenticated);
+    }
+  } catch (err) {
+    return res.json(notAuthenticated);
   }
 });
 
@@ -166,7 +182,6 @@ async function checkauthentication(req, res, next) {
     } else {
       res.status(401).json({ error: "The User does not exist." });
     }
-
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
