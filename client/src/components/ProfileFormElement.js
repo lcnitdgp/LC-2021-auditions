@@ -11,7 +11,7 @@ function ProfileEdit(props) {
   let history = useHistory();
 
   useEffect(() => {
-    axios.get("/api/profile").then((response) => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/profile`).then((response) => {
       console.log(response.data);
       setForm(response.data);
     });

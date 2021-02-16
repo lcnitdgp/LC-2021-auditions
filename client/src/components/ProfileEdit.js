@@ -6,12 +6,14 @@ import { useHistory, Redirect } from "react-router-dom";
 import Loader from "./Loader";
 import "./ProfileEdit.css";
 import { updateUser } from "../actions";
-
+const escapeStringRegexp = require("escape-string-regexp");
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 function ProfileEdit(props) {
   const [form, setForm] = useState({});
+  const [error, setError] = useState({});
+
   let history = useHistory();
   // console.log(props.location)
   const header = {
@@ -19,19 +21,27 @@ function ProfileEdit(props) {
       "x-auth-token": localStorage.getItem("token"),
     },
   };
-  console.log("The new header is:",header);
-  console.log("Header is:",header);
+  console.log("The new header is:", header);
   useEffect(() => {
     // console.log(props.location.state);
+    var details = {};
     if (props.location && !props.location.state) {
       console.log("api called.");
       axios.get(`${backendUrl}/api/profile`, header).then((response) => {
         console.log(response.data);
         setForm(response.data);
+        response.data.Object.keys(response.data).forEach(
+          (element) => (details[element] = "")
+        );
       });
     } else if (props.location) {
       setForm(props.location.state);
+      Object.keys(props.location.state).forEach(
+        (element) => (details[element] = "")
+      );
     }
+    console.log(details);
+    setError(details);
   }, []);
 
   const arr = Object.keys(form);
@@ -42,7 +52,37 @@ function ProfileEdit(props) {
     return <Loader />;
   }
 
+  const ErrorCheck = () => {
+    var isFalse = false;
+    for (const element in error) {
+      const value = form[element];
+      console.log(element, value);
+
+      if (!value) {
+        isFalse = true;
+        error[element] = "This field is required.";
+      } else {
+        error[element] = "";
+      }
+
+      if (element === "phone") {
+        const phoneRegEx = /^[+]?(\d{1,2})?[\s.-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+        if (phoneRegEx.test(value)) {
+          error[element] = "";
+        } else {
+          isFalse = true;
+          error[element] = "Please enter a valid Phone Number";
+        }
+      }
+    }
+    return isFalse;
+  };
+
   const onHandleSubmit = async (e) => {
+    if (ErrorCheck()) {
+      console.log("Fill the form properly.");
+      return;
+    }
     e.preventDefault();
     console.log("changing user.");
     await props.updateUser(form);
@@ -53,10 +93,14 @@ function ProfileEdit(props) {
       history.push("/form");
     }
   };
+
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
   // console.log(props.location.state);
+  ErrorCheck();
+  console.log("The errors are:", error);
+
   return (
     <div className="ProfileEdit">
       <Form onSubmit={onHandleSubmit} className="form_edit">
@@ -77,7 +121,12 @@ function ProfileEdit(props) {
                   setForm({ ...form, [element]: e.target.value })
                 }
                 required
+                isInvalid={error[element]}
+                isValid={!error[element]}
               />
+              <Form.Control.Feedback type="invalid">
+                {error[element]}
+              </Form.Control.Feedback>
             </Form.Group>
           );
         })}

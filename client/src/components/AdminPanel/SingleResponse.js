@@ -6,6 +6,7 @@ import { fetchForm } from "../../actions";
 import { Form, Col, Row,Container } from "react-bootstrap";
 import Loader from "../Loader";
 import "./SingleResponse.css";
+import $ from "jquery";
 
 const header = {
   headers: {
@@ -271,6 +272,7 @@ class SingleResponse extends Component {
     if (Object.keys(this.state.responses).length === 0) {
       return <Loader />;
     }
+    
     return (
       <div className="single-response">
         <Container>

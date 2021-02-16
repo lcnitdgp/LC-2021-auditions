@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 
 import { fetchForm, submitResponse } from "../actions";
 import { Form, Col, Row, Button, Modal, Container } from "react-bootstrap";
 import "./CollectResponse.css";
 import Loader from "./Loader";
+import $ from "jquery";
 
 class CollectResponse extends Component {
   constructor(props) {
@@ -12,14 +13,14 @@ class CollectResponse extends Component {
     this.state = {
       response: {},
       show: false,
-      loading : false,
+      loading: false,
+      scroll: 0,
     };
   }
-
   async componentDidMount() {
     await this.props.fetchForm();
     var response = {};
-    // console.log(this.props.form);
+    console.log(this.props.form);
     for (const element in this.props.form) {
       // console.log(element);
       const { type, _id, fields, options } = this.props.form[element];
@@ -47,6 +48,7 @@ class CollectResponse extends Component {
     console.log(response);
     this.setState({ response });
   }
+
   onChangeState(value, _id) {
     this.setState({
       ...this.state,
@@ -116,7 +118,7 @@ class CollectResponse extends Component {
         );
       } else if (type === "radio") {
         return (
-          <div className="form_element">
+          <div className="form_element" key={_id}>
             <Form.Group key={_id} controlId={`formGroup-${_id}`}>
               {image ? <img class="image" src={image} /> : ""}
               <Form.Label>
@@ -205,7 +207,7 @@ class CollectResponse extends Component {
 
                 if (type === "text") {
                   return (
-                    <Row key={`${_id}-${index}`}>
+                    <Row >
                       <Col>
                         <Form.Group>
                           <Form.Label>
@@ -219,6 +221,7 @@ class CollectResponse extends Component {
                                 e.target.value
                               )
                             }
+                            key={`${_id}-${index}`}
                             value={this.state.response[_id][index]}
                           />
                         </Form.Group>
@@ -227,7 +230,7 @@ class CollectResponse extends Component {
                   );
                 } else if (type === "textarea") {
                   return (
-                    <Row key={`${_id}-${index}`}>
+                    <Row>
                       <Col>
                         <Form.Group>
                           <Form.Label>
@@ -242,6 +245,7 @@ class CollectResponse extends Component {
                                 e.target.value
                               )
                             }
+                            key={`${_id}-${index}`}
                             value={this.state.response[_id][index]}
                           />
                         </Form.Group>
@@ -250,9 +254,13 @@ class CollectResponse extends Component {
                   );
                 } else {
                   return (
-                    <Row key={`${_id}-${index}`}>
+                    <Row>
                       <Col>
-                        <Form.Group as={Row} controlId="formBasicRangeCustom">
+                        <Form.Group
+                          as={Row}
+                          controlId="formBasicRangeCustom"
+                          key={`${_id}-${index}`}
+                        >
                           <Col xs={8} sm={10}>
                             <Form.Label>
                               {index + 1}){content}
@@ -333,27 +341,29 @@ class CollectResponse extends Component {
               onClick={() => this.onSubmit()}
               disabled={this.state.loading}
             >
-              {this.state.loading?`Loading,,,`:`SUBMIT`}
+              {this.state.loading ? `Loading,,,` : `SUBMIT`}
             </Button>
           </Modal.Footer>
         </Modal>
       </>
     );
-  }
+  };
   submittedForm() {
     return (
       <div className="form-group submitted">You Have Submitted The Form :)</div>
     );
   }
+
   render() {
     // console.log(this.state, this.props.user, "Form Opened.");
     if (!Object.keys(this.state.response).length) {
       return <Loader />;
-    };
+    }
     // console.log(this.props.user.filledForm);
     if (this.props.user.filledForm) {
       return <div className="collect-response">{this.submittedForm()}</div>;
     }
+
     return (
       <Container style={{ maxWidth: "700px" }}>
         <Form onSubmit>
