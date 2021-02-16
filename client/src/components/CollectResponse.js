@@ -81,6 +81,10 @@ class CollectResponse extends Component {
       },
     });
   }
+  handleClick(id) {
+    console.log(id);
+    this[id].focus();
+  }
   renderForm() {
     return Object.keys(this.props.form).map((element, index) => {
       // console.log(element);
@@ -99,6 +103,10 @@ class CollectResponse extends Component {
             <Form.Control
               onChange={(e) => this.onChangeState(e.target.value, _id)}
               value={this.state.response[_id] || ""}
+              ref={(input) => {
+                this[`ref-${_id}`] = input;
+              }}
+              onClick={() => this.handleClick(`ref-${_id}`)}
             />
           </Form.Group>
         );
@@ -113,6 +121,10 @@ class CollectResponse extends Component {
               as="textarea"
               onChange={(e) => this.onChangeState(e.target.value, _id)}
               value={this.state.response[_id] || ""}
+              ref={(input) => {
+                this[`ref-${_id}`] = input;
+              }}
+              onClick={() => this.handleClick(`ref-${_id}`)}
             />
           </Form.Group>
         );
@@ -134,6 +146,10 @@ class CollectResponse extends Component {
                       id={`radios-${_id}-${index}`}
                       key={`${_id}-${index}`}
                       onChange={() => this.onChangeState(index, _id)}
+                      ref={(input) => {
+                        this[`ref-${_id}-${index}`] = input;
+                      }}
+                      onClick={() => this.handleClick(`ref-${_id}-${index}`)}
                     />
                   );
                 })}
@@ -154,10 +170,14 @@ class CollectResponse extends Component {
                   <Form.Check
                     type={type}
                     label={element}
-                    name={`radios-${_id}`}
-                    id={`radios-${_id}-${index}`}
+                    name={`checkbox-${_id}`}
+                    id={`checkbox-${_id}-${index}`}
                     key={`${_id}-${index}`}
                     onChange={() => this.onChangeCheckBoxState(index, _id)}
+                    ref={(input) => {
+                      this[`ref-${_id}-${index}`] = input;
+                    }}
+                    onClick={() => this.handleClick(`ref-${_id}-${index}`)}
                   />
                 );
               })}
@@ -177,10 +197,17 @@ class CollectResponse extends Component {
                   type="range"
                   custom
                   value={this.state.response[_id]}
-                  onChange={(e) => this.onChangeState(e.target.value, _id)}
+                  onChange={(e) => {
+                    this.handleClick(`ref-${_id}`);
+                    console.log("State changed.");
+                    this.onChangeState(e.target.value, _id);
+                  }}
                   min={options[0]}
                   max={options[1]}
                   style={{ marginTop: "1rem" }}
+                  ref={(input) => {
+                    this[`ref-${_id}`] = input;
+                  }}
                 />
               </Col>
               <Col>
@@ -207,7 +234,7 @@ class CollectResponse extends Component {
 
                 if (type === "text") {
                   return (
-                    <Row >
+                    <Row>
                       <Col>
                         <Form.Group>
                           <Form.Label>
@@ -223,6 +250,12 @@ class CollectResponse extends Component {
                             }
                             key={`${_id}-${index}`}
                             value={this.state.response[_id][index]}
+                            ref={(input) => {
+                              this[`ref-${_id}-${index}`] = input;
+                            }}
+                            onClick={() =>
+                              this.handleClick(`ref-${_id}-${index}`)
+                            }
                           />
                         </Form.Group>
                       </Col>
@@ -247,6 +280,12 @@ class CollectResponse extends Component {
                             }
                             key={`${_id}-${index}`}
                             value={this.state.response[_id][index]}
+                            ref={(input) => {
+                              this[`ref-${_id}-${index}`] = input;
+                            }}
+                            onClick={() =>
+                              this.handleClick(`ref-${_id}-${index}`)
+                            }
                           />
                         </Form.Group>
                       </Col>
@@ -270,14 +309,18 @@ class CollectResponse extends Component {
                               custom
                               min={options[0]}
                               max={options[1]}
-                              onChange={(e) =>
+                              onChange={(e) => {
+                                this.handleClick(`ref-${_id}-${index}`);
                                 this.onChangeSubQuestion(
                                   index,
                                   _id,
                                   e.target.value
-                                )
-                              }
+                                );
+                              }}
                               value={this.state.response[_id][index]}
+                              ref={(input) => {
+                                this[`ref-${_id}-${index}`] = input;
+                              }}
                             />
                           </Col>
                           <Col>
@@ -363,7 +406,7 @@ class CollectResponse extends Component {
     if (this.props.user.filledForm) {
       return <div className="collect-response">{this.submittedForm()}</div>;
     }
-
+    console.log(this);
     return (
       <Container style={{ maxWidth: "700px" }}>
         <Form onSubmit>
