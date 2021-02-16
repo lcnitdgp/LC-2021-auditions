@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital@1&family=Noto+Serif:ital@1&display=swap');
+
 .App {
   max-height: 100vh;
   overflow: hidden;
@@ -194,4 +196,9 @@ input[type="range"]::-webkit-slider-thumb {
 
 .nav-menu-items::-webkit-scrollbar {
   display: none;
+}
+
+.form-label {
+  font-family: 'Noto Serif', serif;
+  font-size : 1rem;
 }
