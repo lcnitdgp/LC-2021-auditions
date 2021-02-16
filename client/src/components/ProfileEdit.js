@@ -28,20 +28,24 @@ function ProfileEdit(props) {
     if (props.location && !props.location.state) {
       console.log("api called.");
       axios.get(`${backendUrl}/api/profile`, header).then((response) => {
-        console.log(response.data);
         setForm(response.data);
-        Object.keys(response.data).forEach(
-          (element) => (details[element] = "")
-        );
+        console.log(response.data);
+        Object.keys(response.data).forEach((element) => {
+          console.log(element);
+          details[element] = "";
+        });
+        console.log(details);
+        setError(details);
       });
     } else if (props.location) {
       setForm(props.location.state);
-      Object.keys(props.location.state).forEach(
-        (element) => (details[element] = "")
-      );
+      Object.keys(props.location.state).forEach((element) => {
+        console.log(element);
+        details[element] = "";
+      });
+      console.log(details);
+      setError(details);
     }
-    console.log(details);
-    setError(details);
   }, []);
 
   const arr = Object.keys(form);
@@ -105,7 +109,7 @@ function ProfileEdit(props) {
     <div className="ProfileEdit">
       <Form onSubmit={onHandleSubmit} className="form_edit">
         {arr.map((element, index) => {
-          //   console.log(element, form[element]);
+          console.log(error, element, error[element]);
           return (
             <Form.Group controlId={element} key={index}>
               <Form.Label className="title">

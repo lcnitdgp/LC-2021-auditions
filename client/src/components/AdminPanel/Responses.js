@@ -4,6 +4,7 @@ import { Card, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MakeAdminModal from "./MakeAdminModal";
 import Loader from "../Loader";
+import "./Responses.css";
 
 export default class Responses extends Component {
   constructor(props) {
@@ -43,6 +44,12 @@ export default class Responses extends Component {
     }
     return (
       <Container style={{ maxWidth: "660px", justifyContent: "flex-start" }}>
+        <div className="Responses">
+          <p className="responses_title">Responses</p>
+          <p className="responses_body">
+            Total Number Of Responses : {this.state.list ? this.state.list.length : 0}
+          </p>
+        </div>
         {this.state.list &&
           this.state.list.map((element, index) => {
             console.log(element);

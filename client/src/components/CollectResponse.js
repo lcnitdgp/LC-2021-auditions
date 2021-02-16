@@ -238,7 +238,7 @@ class CollectResponse extends Component {
                       <Col>
                         <Form.Group>
                           <Form.Label>
-                            {index + 1}){content}
+                            {index + 1}) {content}
                           </Form.Label>
                           <Form.Control
                             onChange={(e) =>
@@ -267,7 +267,7 @@ class CollectResponse extends Component {
                       <Col>
                         <Form.Group>
                           <Form.Label>
-                            {index + 1}){content}
+                            {index + 1}) {content}
                           </Form.Label>
                           <Form.Control
                             as={type}
@@ -302,7 +302,7 @@ class CollectResponse extends Component {
                         >
                           <Col xs={8} sm={10}>
                             <Form.Label>
-                              {index + 1}){content}
+                              {index + 1}) {content}
                             </Form.Label>
                             <Form.Control
                               type="range"
