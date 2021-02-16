@@ -30,7 +30,7 @@ function ProfileEdit(props) {
       axios.get(`${backendUrl}/api/profile`, header).then((response) => {
         console.log(response.data);
         setForm(response.data);
-        response.data.Object.keys(response.data).forEach(
+        Object.keys(response.data).forEach(
           (element) => (details[element] = "")
         );
       });
@@ -108,7 +108,7 @@ function ProfileEdit(props) {
           //   console.log(element, form[element]);
           return (
             <Form.Group controlId={element} key={index}>
-              <Form.Label>
+              <Form.Label className="title">
                 {element === "phone"
                   ? "Phone Number (Preferably Whatsapp)"
                   : element === "roll"
@@ -123,6 +123,7 @@ function ProfileEdit(props) {
                 required
                 isInvalid={error[element]}
                 isValid={!error[element]}
+                autoComplete="off"
               />
               <Form.Control.Feedback type="invalid">
                 {error[element]}

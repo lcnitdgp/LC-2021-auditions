@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { connect } from "react-redux";
 import { logOutUser } from "../actions";
-import { Button, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Button, Navbar, Nav, NavDropdown, Row } from "react-bootstrap";
 import "./MyNavbar.css";
 import { Link } from "react-router-dom";
 import lcLogo from "../images/lc.png";
@@ -73,7 +73,7 @@ function MyNavbar(props) {
       : [...noAdminSidebarData, logOutNav]
     : [];
 
-  console.log(user,sidebar);
+  console.log(user, sidebar);
 
   return (
     <div class="Navbar">
@@ -111,9 +111,11 @@ function MyNavbar(props) {
               <div className="horizontally_center_items nav-image-main">
                 <img src={user.image} />
               </div>
-              <div className="horizontally_center_items nav-image-name">
-                {user.name}
-              </div>
+              <Row style={{ justifyContent: "center", margin: "5px 10px" }}>
+                <div className="horizontally_center_items nav-image-name">
+                  {user.name}
+                </div>
+              </Row>
             </li>
             {SidebarData.map((item, index) => {
               return (

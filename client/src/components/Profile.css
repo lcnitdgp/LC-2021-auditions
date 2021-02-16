@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Benne&display=swap");
+
 .Profile {
   width: 500px;
 }
@@ -39,6 +41,12 @@
   border: 2px groove rgb(235, 221, 197);
 }
 
+.Profile .title {
+  font-family: "Benne", serif;
+  font-weight: bold;
+  font-size: 1.05rem;
+}
+
 @media (min-width: 768px) {
   .Profile .photo {
     margin-right: 20px;
@@ -49,6 +57,9 @@
   .Profile {
     width: 300px;
     font-size: 0.7rem;
+  }
+  .Profile .title {
+    font-size: 0.6rem;
   }
   .Profile .photo {
     border-radius: 50%;
