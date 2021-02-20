@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { fetchForm, submitResponse } from "../actions";
 import { Form, Col, Row, Button, Modal, Container } from "react-bootstrap";
 import "./CollectResponse.css";
+import FormFilled from "./FormFilled";
 import Loader from "./Loader";
 import $ from "jquery";
 
@@ -406,17 +407,19 @@ class CollectResponse extends Component {
     if (this.props.user.filledForm) {
       return <div className="collect-response">{this.submittedForm()}</div>;
     }
-    console.log(this);
-    return (
-      <Container style={{ maxWidth: "700px" }}>
-        <Form onSubmit>
-          <div class="collect-response">
-            {this.renderForm()}
-            {this.renderSubmitButton()}
-          </div>
-        </Form>
-      </Container>
-    );
+    return <FormFilled />;
+
+    // console.log(this);
+    // return (
+    //   <Container style={{ maxWidth: "700px" }}>
+    //     <Form onSubmit>
+    //       <div class="collect-response">
+    //         {this.renderForm()}
+    //         {this.renderSubmitButton()}
+    //       </div>
+    //     </Form>
+    //   </Container>
+    // );
   }
 }
 
