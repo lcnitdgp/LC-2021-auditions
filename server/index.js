@@ -21,7 +21,8 @@ mongoose.connect(MONGO_URL, {
   useCreateIndex: true,
 });
 
-app.use(cors()); // Use this after the variable declaration
+// app.use(cors()); // Use this after the variable declaration
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 //middleware
 app.use(bodyParser.json({ limit: "50mb", extended: true }));

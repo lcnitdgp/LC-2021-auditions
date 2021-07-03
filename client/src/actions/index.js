@@ -8,6 +8,8 @@ import {
 import axios from "axios";
 
 const backendUrl = "http://localhost:5000";
+axios.defaults.baseURL = `${backendUrl}`;
+axios.defaults.withCredentials = true;
 
 // auth routes
 export const fetchUser = () => async (dispatch) => {
