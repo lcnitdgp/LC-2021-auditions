@@ -7,8 +7,12 @@ import {
 } from "./types";
 import axios from "axios";
 
-const backendUrl = "http://localhost:5000";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+// use the default backend url
 axios.defaults.baseURL = `${backendUrl}`;
+
+// pass cookies with every request
 axios.defaults.withCredentials = true;
 
 // auth routes
@@ -17,6 +21,7 @@ export const fetchUser = () => async (dispatch) => {
   console.log(response);
   dispatch({ type: FETCH_USER, payload: response.data });
 };
+
 export const logOutUser = () => async (dispatch) => {
   const response = await axios.get(`/auth/logout`);
   console.log(response);
@@ -24,7 +29,7 @@ export const logOutUser = () => async (dispatch) => {
 };
 export const updateUser = (form) => async (dispatch) => {
   console.log("Updating form.");
-  const response = await axios.put("/api/profile", form);;
+  const response = await axios.put("/api/profile", form);
   console.log(response);
   dispatch({ type: FETCH_USER, payload: response.data });
 };
@@ -51,17 +56,16 @@ export const deleteFormElement = (id) => async (dispatch) => {
 };
 
 export const fetchForm = () => async (dispatch) => {
-  console.log("Fetching Form.")
+  console.log("Fetching Form.");
   const response = await axios.get(`/api/questionslist`);
   console.log(response);
   dispatch({ type: FETCH_FORM, payload: response.data.qList });
 };
 
 // responses
-
 export const submitResponse = (userResponse) => async (dispatch) => {
-  console.log("submitting response :",userResponse)
-  const response = await axios.post(`/api/response`,userResponse);
+  console.log("submitting response :", userResponse);
+  const response = await axios.post(`/api/response`, userResponse);
   console.log(response);
   dispatch({ type: FETCH_USER, payload: response.data });
 };

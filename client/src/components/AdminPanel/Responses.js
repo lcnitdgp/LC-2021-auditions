@@ -16,7 +16,7 @@ export default class Responses extends Component {
   async componentDidMount() {
     try {
       const response = await axios.get("/api/participants");
-      //   console.log(response.data);
+      console.log(response.data);
       this.setState({ ...this.state, list: response.data.uList });
     } catch (err) {
       console.log(err);
@@ -33,7 +33,7 @@ export default class Responses extends Component {
       return <Loader />;
     }
     return (
-      <Container style={{ maxWidth: "660px" , justifyContent:'flex-start' }} >
+      <Container style={{ maxWidth: "660px", justifyContent: "flex-start" }}>
         {this.state.list &&
           this.state.list.map((element, index) => {
             console.log(element);
