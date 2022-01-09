@@ -55,6 +55,24 @@ app.use(passport.session());
 require("./routes/users")(app);
 require("./routes/questions")(app);
 
+// if (process.env.NODE_ENV === "production") {
+
+//only in prod version
+//if route for a particular route not recognized on server side
+//then check in client side
+
+//Express will serve up the index.html file
+//if it dosent recognize the route even on client side
+const path = require("path");
+app.use(express.static(path.join(__dirname, "../client/build")));
+
+app.get("*", (req, res) => {
+  console.log("Sending front end assets");
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
+
+// }
+
 app.listen(PORT, () => {
   console.log("The server is active on :", PORT);
 });
