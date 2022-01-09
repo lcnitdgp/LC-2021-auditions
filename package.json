@@ -17,7 +17,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
-    "escape-string-regexp": "^4.0.0",
+    "helmet": "^5.0.1",
     "react-bootstrap": "^1.4.3",
     "react-bootstrap-range-slider": "^2.0.2",
     "react-icons": "^4.2.0",

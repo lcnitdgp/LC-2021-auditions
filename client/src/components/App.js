@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUser } from "../actions";
@@ -16,41 +16,7 @@ import MyNavbar from "./MyNavbar";
 import SingleResponse from "./AdminPanel/SingleResponse";
 import Profile from "./Profile";
 import ProfileEdit from "./ProfileEdit";
-import Loader from "./Loader";
 import Particles from "./Particles.js";
-
-// import dunder from "../../public/dunder.jpg";
-
-const routes = [
-  {
-    component: <Landing />,
-    path: "/",
-  },
-  {
-    component: <CollectResponse />,
-    path: "/form",
-  },
-  {
-    component: <Profile />,
-    path: "/profile",
-  },
-  {
-    component: <ProfileEdit />,
-    path: "/profile/edit",
-  },
-  {
-    component: <Responses />,
-    path: "/admin",
-  },
-  {
-    component: <RenderAdminForm />,
-    path: "/admin/form",
-  },
-  {
-    component: <SingleResponse />,
-    path: "/admin/responses/:id",
-  },
-];
 
 class App extends Component {
   constructor(props) {
@@ -81,7 +47,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Particles />
+        {/* <Particles /> */}
         <div className="Loader" ref={this.loading}>
           <img class="image_loader" src={officePreLoad} />
         </div>
@@ -105,49 +71,31 @@ class App extends Component {
                     />
                     {/* login Routes */}
                     {this.props.user.authenticated ? (
-                      <Route component={CollectResponse} path="/form" />
-                    ) : (
-                      ""
-                    )}
-                    {this.props.user.authenticated ? (
-                      <Route exact component={Profile} path="/profile" />
-                    ) : (
-                      ""
-                    )}
-                    {this.props.user.authenticated ? (
-                      <Route
-                        exact
-                        component={ProfileEdit}
-                        path="/profile/edit"
-                      />
-                    ) : (
-                      ""
-                    )}
-
-                    {this.props.user.authenticated &&
-                    this.props.user.isadmin ? (
-                      <Route exact component={Responses} path="/admin" />
-                    ) : (
-                      ""
-                    )}
-
-                    {this.props.user.authenticated &&
-                    this.props.user.isadmin ? (
-                      <Route
-                        exact
-                        component={RenderAdminForm}
-                        path="/admin/form"
-                      />
-                    ) : (
-                      ""
-                    )}
-
-                    {this.props.user.authenticated &&
-                    this.props.user.isadmin ? (
-                      <Route
-                        component={SingleResponse}
-                        path="/admin/responses/:id"
-                      />
+                      <>
+                        <Route component={CollectResponse} path="/form" />
+                        <Route exact component={Profile} path="/profile" />
+                        <Route
+                          exact
+                          component={ProfileEdit}
+                          path="/profile/edit"
+                        />
+                        {this.props.user.isadmin ? (
+                          <>
+                            <Route exact component={Responses} path="/admin" />
+                            <Route
+                              exact
+                              component={RenderAdminForm}
+                              path="/admin/form"
+                            />
+                            <Route
+                              component={SingleResponse}
+                              path="/admin/responses/:id"
+                            />
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </>
                     ) : (
                       ""
                     )}

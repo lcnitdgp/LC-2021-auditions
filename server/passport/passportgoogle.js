@@ -2,10 +2,12 @@ const users = require("../models/users");
 const GoogleStrategy = require("passport-google-oauth20");
 
 module.exports = function (passport) {
+  // stores only the user id in the cookie
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
 
+  // fetch the user using the id in the cookie
   passport.deserializeUser((id, done) => {
     users.findById(id).then((user) => {
       done(null, user);

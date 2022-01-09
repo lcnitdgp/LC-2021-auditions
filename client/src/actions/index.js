@@ -5,67 +5,49 @@ import {
   FETCH_FORM,
   FETCH_USER,
 } from "./types";
-import axiosConfig from "../config/axios";
+
 import axios from "axios";
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-var header = {
-  headers: {
-    "x-auth-token": localStorage.getItem("token"),
-  },
-};
+// use the default backend url
+axios.defaults.baseURL = backendUrl;
+
+// pass cookies with every request
+axios.defaults.withCredentials = true;
 
 // auth routes
 export const fetchUser = () => async (dispatch) => {
-  console.log(backendUrl);
-  console.log(process.env);
-  header = {
-    headers: {
-      "x-auth-token": localStorage.getItem("token"),
-    },
-  };
-  const response = await axios.get(`${backendUrl}/api/current`, header);
-  console.log(header);
+  const response = await axios.get(`/api/current`);
   console.log(response);
   dispatch({ type: FETCH_USER, payload: response.data });
 };
+
 export const logOutUser = () => async (dispatch) => {
-  const response = await axios.get(`${backendUrl}/auth/logout`);
-  localStorage.removeItem('token');
+  const response = await axios.get(`/auth/logout`);
   console.log(response);
   dispatch({ type: FETCH_USER, payload: response.data });
 };
 export const updateUser = (form) => async (dispatch) => {
   console.log("Updating form.");
-  console.log(localStorage.getItem("token"));
-  const response = await axios.put(`${backendUrl}/api/profile`, form, header);
+  const response = await axios.put("/api/profile", form);
   console.log(response);
   dispatch({ type: FETCH_USER, payload: response.data });
 };
 //form routes
 export const createFormElement = (content, type) => async (dispatch) => {
   console.log("adding form element", content, type);
-  console.log(localStorage.getItem("token"));
-  const response = await axios.post(
-    `${backendUrl}/api/questionsadd`,
-    {
-      content,
-      type,
-    },
-    header
-  );
+
+  const response = await axios.post(`/api/questionsadd`, {
+    content,
+    type,
+  });
   console.log(response);
   dispatch({ type: CREATE_FORM_ELEMENT, payload: response.data });
 };
 
 export const editFormElement = (formElement) => async (dispatch) => {
   console.log("editing form element:", formElement);
-  console.log(localStorage.getItem("token"));
-  const response = await axios.put(
-    `${backendUrl}/api/questionsupdate`,
-    formElement,
-    header
-  );
+  const response = await axios.put(`/api/questionsupdate`, formElement);
   console.log(response);
   dispatch({ type: EDIT_FORM_ELEMENT, payload: response.data });
 };
@@ -73,35 +55,24 @@ export const editFormElement = (formElement) => async (dispatch) => {
 export const deleteFormElement = (id) => async (dispatch) => {
   console.log("deleting form element : ", id);
   console.log(localStorage.getItem("token"));
-  const response = await axios.delete(
-    `${backendUrl}/api/questionsdelete`,
-    {
-      data: { id },
-    },
-    header
-  );
+  const response = await axios.delete(`/api/questionsdelete`, {
+    data: { id },
+  });
   console.log(response);
   dispatch({ type: DELETE_FORM_ELEMENT, payload: response.data });
 };
 
 export const fetchForm = () => async (dispatch) => {
   console.log("Fetching Form.");
-  console.log(localStorage.getItem("token"));
-  const response = await axios.get(`${backendUrl}/api/questionslist`, header);
+  const response = await axios.get(`/api/questionslist`);
   console.log(response);
   dispatch({ type: FETCH_FORM, payload: response.data.qList });
 };
 
 // responses
-
 export const submitResponse = (userResponse) => async (dispatch) => {
   console.log("submitting response :", userResponse);
-  console.log(localStorage.getItem("token"));
-  const response = await axios.post(
-    `${backendUrl}/api/response`,
-    userResponse,
-    header
-  );
+  const response = await axios.post(`/api/response`, userResponse);
   console.log(response);
   dispatch({ type: FETCH_USER, payload: response.data });
 };

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Card, Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MakeAdminModal from "./MakeAdminModal";
 import Loader from "../Loader";
@@ -16,17 +16,8 @@ export default class Responses extends Component {
   }
   async componentDidMount() {
     try {
-      const header = {
-        headers: {
-          "x-auth-token": localStorage.getItem("token"),
-        },
-      };
-
-      const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/participants`,
-        header
-      );
-      //   console.log(response.data);
+      const response = await axios.get("/api/participants");
+      console.log(response.data);
       this.setState({ ...this.state, list: response.data.uList });
     } catch (err) {
       console.log(err);
