@@ -6,10 +6,11 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 const chalk = require("chalk");
-const PORT = process.env.PORT || 5000;
 
 // import the environment variables
 require("dotenv").config();
+
+const PORT = process.env.PORT || 5000;
 
 var passport = require("passport");
 require("./passport/passportgoogle")(passport);
@@ -54,18 +55,23 @@ app.use(passport.session());
 require("./routes/users")(app);
 require("./routes/questions")(app);
 
-if (process.env.NODE_ENV === "production") {
-  //only in prod version
-  //if route for a particular route not recognized on server side
-  //then check in client side
-  app.use(express.static("client/build"));
-  //Express will serve up the index.html file
-  //if it dosent recognize the route even on  client side
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+
+//only in prod version
+//if route for a particular route not recognized on server side
+//then check in client side
+
+//Express will serve up the index.html file
+//if it dosent recognize the route even on client side
+const path = require("path");
+app.use(express.static(path.join(__dirname, "../client/build")));
+
+app.get("*", (req, res) => {
+  console.log("Sending front end assets");
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
+
+// }
 
 app.listen(PORT, () => {
   console.log("The server is active on :", PORT);

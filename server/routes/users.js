@@ -6,11 +6,6 @@ const { success, warning } = require("../services/chalk");
 
 module.exports = (app) => {
   // AUTH /
-  app.get("/", (req, res) => {
-    console.log("The current user is:", req.user);
-    res.json(req.user);
-  });
-
   app.get(
     "/auth/google",
     passport.authenticate("google", {

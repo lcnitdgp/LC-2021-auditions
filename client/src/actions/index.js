@@ -6,14 +6,7 @@ import {
   FETCH_USER,
 } from "./types";
 
-import axios from "axios";
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
-
-// use the default backend url
-axios.defaults.baseURL = backendUrl;
-
-// pass cookies with every request
-axios.defaults.withCredentials = true;
+import axios from "../config/axios";
 
 // auth routes
 export const fetchUser = () => async (dispatch) => {
@@ -54,7 +47,7 @@ export const editFormElement = (formElement) => async (dispatch) => {
 
 export const deleteFormElement = (id) => async (dispatch) => {
   console.log("deleting form element : ", id);
-  console.log(localStorage.getItem("token"));
+
   const response = await axios.delete(`/api/questionsdelete`, {
     data: { id },
   });

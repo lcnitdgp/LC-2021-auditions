@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { connect } from "react-redux";
 import { Modal, Button } from "react-bootstrap";
-import axios from "axios";
+import axios from "../../config/axios";
 
 function MakeAdminModal(props) {
   const [show, setShow] = useState(false);
@@ -33,15 +33,10 @@ function MakeAdminModal(props) {
             variant="outline-dark"
             onClick={async () => {
               console.log(props.id, props.index);
-              const header = {
-                headers: {
-                  "x-auth-token": localStorage.getItem("token"),
-                },
-              };
+
               await axios.post(
                 `${process.env.REACT_APP_BACKEND_URL}/api/admin`,
-                { id: props.id },
-                header
+                { id: props.id }
               );
               props.onMakeAdmin(props.index);
               handleClose();

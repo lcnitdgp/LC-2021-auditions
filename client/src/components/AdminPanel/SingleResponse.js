@@ -1,18 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axios from "../../config/axios";
 import { fetchForm } from "../../actions";
-import { Form, Col, Row,Container } from "react-bootstrap";
+import { Form, Col, Row, Container } from "react-bootstrap";
 import Loader from "../Loader";
 import "./SingleResponse.css";
 import $ from "jquery";
-
-const header = {
-  headers: {
-    "x-auth-token": localStorage.getItem("token"),
-  },
-};
 
 class SingleResponse extends Component {
   constructor(props) {
@@ -28,21 +22,16 @@ class SingleResponse extends Component {
       await this.props.fetchForm();
     }
     const id = this.props.match.params.id;
-     const header = {
-       headers: {
-         "x-auth-token": localStorage.getItem("token"),
-       },
-     };
-    const responses = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/individual/${id}`,header);
+
+    const responses = await axios.get(`/api/individual/${id}`);
     console.log(responses);
     this.setState(responses.data);
   }
   renderForm() {
     return Object.keys(this.props.form).map((element, index) => {
       // console.log(element);
-      const { type, _id, content, options, fields, image } = this.props.form[
-        element
-      ];
+      const { type, _id, content, options, fields, image } =
+        this.props.form[element];
       // console.log(_id,options);
       // console.log(type, _id, index,this.state.responses[_id]);
       if (type === "text") {
@@ -272,7 +261,7 @@ class SingleResponse extends Component {
     if (Object.keys(this.state.responses).length === 0) {
       return <Loader />;
     }
-    
+
     return (
       <div className="single-response">
         <Container>

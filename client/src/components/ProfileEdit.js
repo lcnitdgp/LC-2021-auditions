@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
+import axios from "../config/axios";
 import { Form, Button } from "react-bootstrap";
 import { useHistory, Redirect } from "react-router-dom";
 import Loader from "./Loader";
@@ -16,18 +16,14 @@ function ProfileEdit(props) {
 
   let history = useHistory();
   // console.log(props.location)
-  const header = {
-    headers: {
-      "x-auth-token": localStorage.getItem("token"),
-    },
-  };
-  console.log("The new header is:", header);
+
   useEffect(() => {
     // console.log(props.location.state);
     var details = {};
     if (props.location && !props.location.state) {
       console.log("api called.");
-      axios.get(`${backendUrl}/api/profile`, header).then((response) => {
+
+      axios.get(`/api/profile`).then((response) => {
         setForm(response.data);
         console.log(response.data);
         Object.keys(response.data).forEach((element) => {
@@ -70,7 +66,8 @@ function ProfileEdit(props) {
       }
 
       if (element === "phone") {
-        const phoneRegEx = /^[+]?(\d{1,2})?[\s.-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+        const phoneRegEx =
+          /^[+]?(\d{1,2})?[\s.-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
         if (phoneRegEx.test(value)) {
           error[element] = "";
         } else {

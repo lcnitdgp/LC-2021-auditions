@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import axios from "../../config/axios";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MakeAdminModal from "./MakeAdminModal";
@@ -38,7 +38,8 @@ export default class Responses extends Component {
         <div className="Responses">
           <p className="responses_title">Responses</p>
           <p className="responses_body">
-            Total Number Of Responses : {this.state.list ? this.state.list.length : 0}
+            Total Number Of Responses :{" "}
+            {this.state.list ? this.state.list.length : 0}
           </p>
         </div>
         {this.state.list &&

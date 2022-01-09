@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
+import axios from "../config/axios";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 // import ProfileFormElement from "./ProfileFormElement";
@@ -11,10 +11,12 @@ function ProfileEdit(props) {
   let history = useHistory();
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/profile`).then((response) => {
-      console.log(response.data);
-      setForm(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/profile`)
+      .then((response) => {
+        console.log(response.data);
+        setForm(response.data);
+      });
   }, []);
 
   const arr = Object.keys(form);
