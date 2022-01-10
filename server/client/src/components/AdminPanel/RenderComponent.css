@@ -1,0 +1,11 @@
+.render_component .image {
+  max-width: 40vw;
+  max-height: 35vh;
+  object-fit: contain;
+  margin: 0 auto;
+  margin-bottom: 20px;;
+}
+.render_component {
+  display: flex;
+  flex-direction: column;
+}

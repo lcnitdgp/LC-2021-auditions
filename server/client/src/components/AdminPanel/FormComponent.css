@@ -1,0 +1,15 @@
+.form-component .form-group {
+  border-radius: 1px;
+}
+
+.form-component .nav-tabs .nav-link {
+  width: 50%;
+  text-align: center;
+  color: white;
+}
+
+.form-component .nav-link.active {
+  background-color: #f9f4ef;
+  border-color: transparent;
+  color: black
+}
