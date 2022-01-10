@@ -64,11 +64,11 @@ require("./routes/questions")(app);
 //Express will serve up the index.html file
 //if it dosent recognize the route even on client side
 const path = require("path");
-app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 app.get("*", (req, res) => {
   console.log("Sending front end assets");
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 
 // }
