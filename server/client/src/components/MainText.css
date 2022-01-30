@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Amatic+SC:400,700");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@800&display=swap');
 
 .test {
   animation: squiggly-anim 0.34s linear infinite;
@@ -11,6 +11,7 @@
   text-align: center;
   line-height: 1;
   font-size: 4rem;
+  font-family: 'Roboto Slab', serif;
   color: #fff8e4;
 }
 @media only screen and (max-width: 400px) {
