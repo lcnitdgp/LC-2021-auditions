@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.378cefc8.chunk.css",
-    "main.js": "/static/js/main.9c7ce163.chunk.js",
-    "main.js.map": "/static/js/main.9c7ce163.chunk.js.map",
+    "main.css": "/static/css/main.02259917.chunk.css",
+    "main.js": "/static/js/main.ae60cfad.chunk.js",
+    "main.js.map": "/static/js/main.ae60cfad.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.776c1e0d.js",
     "runtime-main.js.map": "/static/js/runtime-main.776c1e0d.js.map",
     "static/css/2.d6008dad.chunk.css": "/static/css/2.d6008dad.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.3301a2bd.chunk.js.map": "/static/js/2.3301a2bd.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.d6008dad.chunk.css.map": "/static/css/2.d6008dad.chunk.css.map",
-    "static/css/main.378cefc8.chunk.css.map": "/static/css/main.378cefc8.chunk.css.map",
+    "static/css/main.02259917.chunk.css.map": "/static/css/main.02259917.chunk.css.map",
     "static/js/2.3301a2bd.chunk.js.LICENSE.txt": "/static/js/2.3301a2bd.chunk.js.LICENSE.txt",
     "static/media/MainText.css": "/static/media/century-schoolbook.4c891be1.ttf",
     "static/media/App.css": "/static/media/mobile.08defa0f.jpg",
@@ -22,7 +22,7 @@
     "static/js/runtime-main.776c1e0d.js",
     "static/css/2.d6008dad.chunk.css",
     "static/js/2.3301a2bd.chunk.js",
-    "static/css/main.378cefc8.chunk.css",
-    "static/js/main.9c7ce163.chunk.js"
+    "static/css/main.02259917.chunk.css",
+    "static/js/main.ae60cfad.chunk.js"
   ]
 }
