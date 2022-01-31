@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@800&display=swap");
+
+@font-face {
+  font-family: auditionFont;
+  src: url("fonts/century-schoolbook.ttf");
+}
 
 .test {
   animation: squiggly-anim 0.34s linear infinite;
@@ -10,13 +15,19 @@
   outline: none;
   text-align: center;
   line-height: 1;
-  font-size: 4rem;
-  font-family: 'Roboto Slab', serif;
+  font-size: 5.25rem;
+  font-family: auditionFont;
+  font-weight: bolder;
   color: #fff8e4;
 }
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 600px) {
   .test {
     font-size: 2.5rem;
+  }
+}
+@media only screen and (max-width: 300px) {
+  .test {
+    font-size: 2rem;
   }
 }
 

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital@1&family=Noto+Serif:ital@1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital@1&family=Noto+Serif:ital@1&display=swap");
 
 .App {
   max-height: 100vh;
@@ -37,7 +37,7 @@
   min-height: 100vh;
 }
 .Loader .image_loader {
-  height: 300px;
+  height: 250px;
   transform: scale(1);
   animation: pulse 2s infinite;
 }
@@ -199,6 +199,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .form-label {
-  font-family: 'Noto Serif', serif;
-  font-size : 1rem;
+  font-family: "Noto Serif", serif;
+  font-size: 1rem;
 }
