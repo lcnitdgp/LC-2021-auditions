@@ -5,8 +5,12 @@ function MainText(props) {
   return (
     <>
       <div class="test" contenteditable>
-        <p>THE LITERARY CIRCLE</p>
-        AUDITIONS
+        <p>
+          <span class="main-text-effect">THE </span>
+          <span class="main-text-effect">LITERARY </span>
+          <span class="main-text-effect">CIRCLE </span>
+        </p>
+        <span class="main-text-effect">AUDITIONS</span>
       </div>
 
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
