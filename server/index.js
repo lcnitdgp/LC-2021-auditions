@@ -55,9 +55,12 @@ app.use(passport.session());
 require("./routes/users")(app);
 require("./routes/questions")(app);
 
+console.log(process.env.NODE_ENV === "production");
+
 if (process.env.NODE_ENV === "production") {
   //Express will serve up the index.html file in production
   //if it dosent recognize the route even on client side
+  console.log("This is in production");
 
   const path = require("path");
   app.use(express.static(path.join(__dirname, "client/build")));

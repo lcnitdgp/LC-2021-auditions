@@ -7,9 +7,9 @@
 .button-edit .btn {
   width: 100%;
   color: #f8f9fa;
-  border: 4px solid #696863;
+  border: 4px solid #8b6d0e;
   font-size: 1.15rem;
-  background: #fff9e9;
+  background: rgb(255 241 211 / 93%);
   color: #444343;
 }
 .button-edit .wrap .btn:hover {
