@@ -6,9 +6,28 @@
   font-weight: 600;
 }
 
-.Responses .responses_body {
+.Responses .responses_body,
+.responses-tab-body {
   text-align: center;
   font-size: 1.3rem;
   margin-bottom: 1rem;
   color: rgb(255, 251, 241);
+}
+
+.responses-form-component .form-group {
+  border-radius: 1px;
+}
+
+.responses-form-component .nav-tabs .nav-link {
+  text-align: center;
+  color: white;
+}
+
+.responses-form-component .nav-link.active {
+  background-color: #f9f4ef;
+  border-color: transparent;
+  color: black;
+}
+.responses-form-component .nav {
+  justify-content: space-evenly;
 }

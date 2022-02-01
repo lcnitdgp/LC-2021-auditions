@@ -115,11 +115,19 @@ module.exports = (app) => {
       const { id } = req.params;
       try {
         const user = await users.findById(id);
+
+        console.log(user);
         if (user.responses) {
           console.log(success("The user responses are:"), user);
           res.json(user);
         } else {
-          res.json({ error: "The user has not submitted the form." });
+          // const {name,email,phone,_id,photo,branch,} = user;
+          console.log(user);
+
+          res.json({
+            ...user._doc,
+            error: "The user has not submitted the form.",
+          });
         }
       } catch (error) {
         console.log(error);
@@ -128,7 +136,7 @@ module.exports = (app) => {
     }
   );
 
-  // VIEW LIST OF PARTICIPANTS //
+  // VIEW LIST OF PARTICIPANT //
 
   app.get(
     "/api/participants",
@@ -136,9 +144,19 @@ module.exports = (app) => {
     checkAdminAuthentication,
     async (req, res) => {
       try {
-        const uList = await users.find().select("name isadmin id");
-        console.log(success("The list is:"), uList);
-        res.json({ uList: uList });
+        const uList = await users
+          .find()
+          .select("name isadmin id responses email");
+        console.log(success("The before list is:"), uList);
+
+        // only send if the responses exist or not
+        uList.forEach((element) => {
+          if (element.responses) element.responses = true;
+          else false;
+        });
+
+        console.log(success("The after list is:"), uList);
+        res.json({ uList });
       } catch (error) {
         console.log(error);
         res.json({ error: "Sorry Could not fetch User List" });

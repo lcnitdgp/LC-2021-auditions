@@ -12,7 +12,7 @@ class SingleResponse extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      responses: {},
+      loading: true,
     };
   }
   async componentDidMount() {
@@ -25,7 +25,7 @@ class SingleResponse extends Component {
 
     const responses = await axios.get(`/api/individual/${id}`);
     console.log(responses);
-    this.setState(responses.data);
+    this.setState({ ...responses.data, loading: false });
   }
   renderForm() {
     return Object.keys(this.props.form).map((element, index) => {
@@ -243,7 +243,9 @@ class SingleResponse extends Component {
                   {elem === "photo" ? (
                     <img src={element[elem]} className="response_image" />
                   ) : (
-                    <p>{element[elem]}</p>
+                    <p>
+                      {element[elem] || "The user has not filled this field"}
+                    </p>
                   )}
                 </div>
               </Form.Label>
@@ -255,11 +257,13 @@ class SingleResponse extends Component {
   }
   render() {
     console.log("single form called", this.state);
-    if (this.state.error) {
-      return <div className="form-group">{this.state.error}</div>;
-    }
-    if (Object.keys(this.state.responses).length === 0) {
+
+    if (this.state.loading) {
       return <Loader />;
+    }
+
+    if (!this.state._id) {
+      return <div className="form-group">This user does not exist .</div>;
     }
 
     return (
@@ -267,8 +271,15 @@ class SingleResponse extends Component {
         <Container>
           <div className="main_heading">Personal Information</div>
           {this.renderInfo()}
+
           <div className="main_heading">Response</div>
-          {this.renderForm()}
+          {this.state.error ? (
+            <>
+              <div className="form-group">{this.state.error}</div>
+            </>
+          ) : (
+            this.renderForm()
+          )}
         </Container>
       </div>
     );

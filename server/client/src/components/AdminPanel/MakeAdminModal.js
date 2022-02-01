@@ -15,7 +15,8 @@ function MakeAdminModal(props) {
         disabled={props.isadmin}
         onClick={handleShow}
         variant="outline-dark"
-        style={{ marginRight: "4px" }}
+        block
+        // style={{ marginRight: "4px" }}
       >
         Make Admin
       </Button>
@@ -38,7 +39,7 @@ function MakeAdminModal(props) {
                 `${process.env.REACT_APP_BACKEND_URL}/api/admin`,
                 { id: props.id }
               );
-              props.onMakeAdmin(props.index);
+              props.onMakeAdmin(props.id);
               handleClose();
             }}
           >
