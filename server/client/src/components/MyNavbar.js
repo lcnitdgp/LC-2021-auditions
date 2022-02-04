@@ -48,12 +48,12 @@ const adminSidebarData = [
     icon: <IoIcons.IoMdPeople />,
     cName: "nav-text",
   },
-  {
-    title: "Edit Form",
-    path: "/admin/form",
-    icon: <FaIcons.FaEnvelopeOpenText />,
-    cName: "nav-text",
-  },
+  // {
+  //   title: "Edit Form",
+  //   path: "/admin/form",
+  //   icon: <FaIcons.FaEnvelopeOpenText />,
+  //   cName: "nav-text",
+  // },
 ];
 
 function MyNavbar(props) {

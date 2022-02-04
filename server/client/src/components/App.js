@@ -76,11 +76,11 @@ class App extends Component {
                         {this.props.user.isadmin ? (
                           <>
                             <Route exact component={Responses} path="/admin" />
-                            <Route
+                            {/* <Route
                               exact
                               component={RenderAdminForm}
                               path="/admin/form"
-                            />
+                            /> */}
                             <Route
                               component={SingleResponse}
                               path="/admin/responses/:id"
