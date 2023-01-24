@@ -29,16 +29,20 @@ module.exports = (app) => {
         authenticated: true,
         filledForm: req.user.responses ? true : false,
         isadmin: req.user.isadmin,
+        isSuperAdmin: req.user.isSuperAdmin,
         image: req.user.photo,
         name: req.user.name,
+        
       });
     } else {
       res.json({
         authenticated: false,
         filledForm: false,
         isadmin: false,
+        isSuperAdmin: false,
         image: null,
         name: null,
+        
       });
     }
   });
@@ -69,6 +73,7 @@ module.exports = (app) => {
         authenticated: true,
         filledForm: newUser.responses ? true : false,
         isadmin: newUser.isadmin,
+        isSuperAdmin: newUser.isSuperAdmin,
         image: newUser.photo,
         name: newUser.name,
       });
@@ -110,6 +115,7 @@ module.exports = (app) => {
       authenticated: false,
       filledForm: false,
       isadmin: false,
+      isSuperAdmin: false,
       image: null,
       name: null,
     });

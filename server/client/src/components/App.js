@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUser } from "../actions";
 import { CSSTransition } from "react-transition-group";
-import officePreLoad from "../images/office_preload.png";
+import officePreLoad from "../images/got loader1.png";
 import "./Particles.js";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
