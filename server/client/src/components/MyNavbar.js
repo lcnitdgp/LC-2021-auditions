@@ -48,13 +48,16 @@ const adminSidebarData = [
     icon: <IoIcons.IoMdPeople />,
     cName: "nav-text",
   },
-  // {
-  //   title: "Edit Form",
-  //   path: "/admin/form",
-  //   icon: <FaIcons.FaEnvelopeOpenText />,
-  //   cName: "nav-text",
-  // },
+  
 ];
+const superAdminSidebarData = [
+  {
+    title: "Edit Form",
+    path: "/admin/form",
+    icon: <FaIcons.FaEnvelopeOpenText />,
+    cName: "nav-text",
+  },
+]
 
 function MyNavbar(props) {
   const [sidebar, setSidebar] = useState(false);
@@ -71,7 +74,7 @@ function MyNavbar(props) {
     ? user.isadmin
       ? [...noAdminSidebarData, ...adminSidebarData, logOutNav]
       : [...noAdminSidebarData, logOutNav]
-    : [];
+    : []? user.isSuperAdmin?[...superAdminSidebarData,...noAdminSidebarData, ...adminSidebarData, logOutNav]:[...noAdminSidebarData, ...adminSidebarData, logOutNav]:[];
 
   console.log(user, sidebar);
 

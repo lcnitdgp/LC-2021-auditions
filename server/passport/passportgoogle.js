@@ -20,6 +20,9 @@ module.exports = function (passport) {
         callbackURL: process.env.GOOGLE_CALLBACK,
         clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
         clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+        // callbackURL: "abcd",
+        // clientID: "abcd",
+        // clientSecret: "abcd",
       },
       (accessToken, refreshToken, profile, done) => {
         // console.log(profile);

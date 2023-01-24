@@ -10,7 +10,6 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "jquery": "^3.5.1",
-    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-bootstrap-range-slider": "^2.0.2",
@@ -48,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "sass": "^1.57.1"
   }
 }

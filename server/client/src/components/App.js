@@ -72,18 +72,24 @@ class App extends Component {
                           exact
                           component={ProfileEdit}
                           path="/profile/edit"
-                        />
-                        {this.props.user.isadmin ? (
+                        />{this.props.user.isadmin ? (
                           <>
                             <Route exact component={Responses} path="/admin" />
-                            {/* <Route
-                              exact
-                              component={RenderAdminForm}
-                              path="/admin/form"
-                            /> */}
+                            
                             <Route
                               component={SingleResponse}
                               path="/admin/responses/:id"
+                            />
+                          </>
+                        ) : (
+                          ""
+                        )}
+                        {this.props.user.isSuperAdmin ? (
+                          <>
+                            <Route
+                              exact
+                              component={RenderAdminForm}
+                              path="/admin/form"
                             />
                           </>
                         ) : (
