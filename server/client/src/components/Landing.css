@@ -18,7 +18,7 @@
 
 .wrap .btn {
   text-decoration: none;
-  border: 5px solid #fff9e9;
+  border: 5px solid #fff2e9;
   position: relative;
   overflow: hidden;
   padding: 6px 15px;
@@ -171,7 +171,7 @@
   top: 100%;
   transform-origin: center top 0px;
   transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.003, 0, -50, 0, 1);
-  background: #a3801b;
+  background: #a3511d;
   -webkit-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
   -moz-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);
   -o-transition: all 500ms cubic-bezier(0.97, 0, 0.395, 0.995);

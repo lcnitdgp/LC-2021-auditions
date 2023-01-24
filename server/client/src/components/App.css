@@ -5,7 +5,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: url(../images/mobile.jpg) rgb(0 0 0 / 22%);
+  background: url(../images/GOTBGmobile.jpeg) rgb(0 0 0 / 22%);
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -15,7 +15,7 @@
 /* till 842 it was fine */
 @media (min-width: 900px) {
   .App {
-    background: url(../images/large.png) rgb(0 0 0 / 22%);
+    background: url(../images/GOTBG2.jpg) rgb(0 0 0 / 22%);
     background-size: cover;
     background-position: center center;
   }
