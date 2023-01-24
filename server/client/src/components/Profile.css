@@ -6,10 +6,10 @@
 
 .button-edit .btn {
   width: 100%;
-  color: #f8f9fa;
-  border: 4px solid #8b6d0e;
+  color: #a49d9d;
+  border: 4px solid #3b3b3b;
   font-size: 1.15rem;
-  background: rgb(255 241 211 / 93%);
+  background: #a49d9d;
   color: #444343;
 }
 .button-edit .wrap .btn:hover {

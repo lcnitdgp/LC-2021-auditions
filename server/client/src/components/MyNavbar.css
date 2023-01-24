@@ -23,7 +23,7 @@
 }
 
 .Navbar .nav-menu {
-  background-color: rgb(44 28 24 / 94%);
+  background-color: #474646;
   width: 250px;
   height: 100vh;
   display: flex;
@@ -50,7 +50,7 @@
 
 .Navbar .nav-text a {
   text-decoration: none;
-  color: #eda797;
+  color: #a49d9d;
   font-size: 18px;
   width: 95%;
   height: 100%;
@@ -61,7 +61,7 @@
 }
 
 .Navbar .nav-text a:hover {
-  background-color: #634d45;
+  background-color: #3b3a3b;
 }
 
 .Navbar .nav-menu-items {
@@ -94,7 +94,7 @@
   display: block;
   height: 5px;
   width: 50px;
-  background: #eda797;
+  background: #a49d9d;
   margin: 10px auto;
 }
 
@@ -112,7 +112,7 @@
 
 .Navbar .con:hover .bar,
 .special-con:hover .bar {
-  background-color: #4c332b;
+  background-color: #a49d9d;
 }
 
 .Navbar .col {
@@ -242,12 +242,12 @@
 
 .Navbar .nav-image-name {
   margin-top: 13px;
-  color: #eda797;
+  color: #a49d9d;
   font-weight: bold;
   text-align: center;
 }
 .Navbar .nav-image-main img {
   border-radius: 50%;
   transform: scale(1.1);
-  border: 2px groove rgb(235, 221, 197);
+  border: 2px groove #3b3a3b;
 }

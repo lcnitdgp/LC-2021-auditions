@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: auditionFont;
-  src: url("fonts/century-schoolbook.ttf");
+  src: url("fonts/Game of Thrones.ttf");
 }
 
 .test {
@@ -14,8 +14,8 @@
   width: 100%;
   outline: none;
   text-align: center;
-  line-height: 1;
-  font-size: 5.25rem;
+  line-height: 1.5;
+  font-size: 4.5rem;
   font-family: auditionFont;
   font-weight: bolder;
   color: #fff8e4;
@@ -113,5 +113,5 @@ p {
   /* background-image: linear-gradient(#ffe470, #a56600);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
-  color: #e9a68c;
+  color: #a49d9d;
 }

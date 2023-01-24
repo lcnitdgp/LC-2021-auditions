@@ -5,7 +5,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: url(../images/GOTBGmobile.jpeg) rgb(0 0 0 / 22%);
+  background: url(../images/GOTBG9.jpg) rgb(0 0 0 / 22%);
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -15,7 +15,7 @@
 /* till 842 it was fine */
 @media (min-width: 900px) {
   .App {
-    background: url(../images/GOTBG8.jpg) rgb(0 0 0 / 22%);
+    background: url(../images/GOTBG9.jpg) rgb(0 0 0 / 22%);
     background-size: cover;
     background-position: center center;
   }
@@ -128,7 +128,7 @@
 /* form styles */
 .form-group {
   margin-bottom: 1rem;
-  background-color: rgb(255 241 211 / 93%);
+  background-color: #a49d9d;
   border-radius: 10px;
   padding: 20px;
 }
@@ -186,7 +186,7 @@ input[type="range"] {
  */
 
 input[type="range"]::-webkit-slider-runnable-track {
-  background: rgb(250, 245, 245) !important;
+  background: #a49d9d !important;
   border: none;
   border-radius: 3px;
   height: 5px;
@@ -198,7 +198,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  background: #8b6d0d;
+  background: #a49d9d;
   margin-top: -4px;
 }
 
@@ -207,7 +207,7 @@ input[type="range"]:focus {
 }
 
 input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: #8b6d0d;
+  background: #a49d9d;
 }
 
 /*IE & Edge thumb*/
@@ -215,7 +215,7 @@ input[type="range"]:focus::-webkit-slider-runnable-track {
 .form-group {
   display: flex;
   flex-direction: column;
-  border: 3px solid #8b6d0e;
+  border: 3px solid #3b3a3a;
 }
 
 .form-group .form-group {
