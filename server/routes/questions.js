@@ -16,8 +16,8 @@ module.exports = (app) => {
   app.post(
     "/api/questionsadd",
     checkauthentication,
-    checkAdminAuthentication,
     checkSuperAdminAuthentication,
+    
     async (req, res) => {
       if (req.body.type === "range") req.body.options = [0, 0];
       const question = await questions.create({
@@ -35,7 +35,7 @@ module.exports = (app) => {
   app.put(
     "/api/questionsupdate",
     checkauthentication,
-    checkAdminAuthentication,
+    
     checkSuperAdminAuthentication,
     async (req, res) => {
       console.log(
@@ -63,8 +63,9 @@ module.exports = (app) => {
   app.delete(
     "/api/questionsdelete",
     checkauthentication,
-    checkAdminAuthentication,
+    
     checkSuperAdminAuthentication,
+    
     async (req, res) => {
       console.log(warning("The questoins has to be deleted:"), req.body.id);
       const question = await questions.findByIdAndDelete(

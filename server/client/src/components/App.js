@@ -66,7 +66,7 @@ class App extends Component {
                     {/* login Routes */}
                     {this.props.user.authenticated ? (
                       <>
-                        <Route component={CollectResponse} path="/form" />
+                        <Route exact component={CollectResponse} path="/form" />
                         <Route exact component={Profile} path="/profile" />
                         <Route
                           exact
@@ -82,8 +82,9 @@ class App extends Component {
                             />
                           </>
                         ) : (
-                          ""
+                          null
                         )}
+                        
                         {this.props.user.isSuperAdmin ? (
                           <>
                             <Route
@@ -93,12 +94,15 @@ class App extends Component {
                             />
                           </>
                         ) : (
-                          ""
+                          null
+                          
                         )}
+                        {/* <Redirect to="/" /> */}
                       </>
                     ) : (
-                      ""
+                      null
                     )}
+                    {console.log("Hello")}
                     <Redirect to="/" />
                   </Switch>
                 </div>

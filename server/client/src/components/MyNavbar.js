@@ -72,33 +72,35 @@ function MyNavbar(props) {
   const { user } = props;
 
   const renderSidebar = () => {
-    const sidebar = [];
-
+    var sidebar = [];
+    
     if (user.authenticated) {
-      sidebar.append(...noAdminSidebarData);
+      sidebar=sidebar.concat(noAdminSidebarData);
       if (user.isadmin) {
-        sidebar.append(...adminSidebarData);
+        sidebar=sidebar.concat(adminSidebarData);
       }
       if (user.isSuperAdmin) {
-        sidebar.append(...superAdminSidebarData);
+        sidebar=sidebar.concat(superAdminSidebarData);
       }
+      sidebar=sidebar.concat(logOutNav);
     }
-    return sidebar;
+    
+    return sidebar
   };
-  const SidebarData = user.authenticated
-    ? user.isadmin
-      ? [...noAdminSidebarData, ...adminSidebarData, logOutNav]
-      : [...noAdminSidebarData, logOutNav]
-      ? user.isSuperAdmin
-        ? [
-            ...noAdminSidebarData,
-            ...superAdminSidebarData,
-            logOutNav,
-          ]
-        : [...noAdminSidebarData, logOutNav]
-      : []
-    : [];
-
+  // const SidebarData = user.authenticated
+  //   ? user.isadmin
+  //     ? [...noAdminSidebarData, ...adminSidebarData, logOutNav]
+  //     : [...noAdminSidebarData, logOutNav] 
+  //     ? user.isSuperAdmin
+  //       ? [
+  //           ...noAdminSidebarData,
+  //           ...superAdminSidebarData,
+  //           logOutNav,
+  //         ]
+  //       : [...noAdminSidebarData, logOutNav]
+  //     : []
+  //   : [];
+  const SidebarData= renderSidebar();
   console.log(user, sidebar);
 
   return (
