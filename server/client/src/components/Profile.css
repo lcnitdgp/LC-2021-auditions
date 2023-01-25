@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Benne&display=swap");
 @font-face {
   font-family: formFont;
-  src: url("fonts/DAYROM__.ttf");
+  src: url("fonts/ramsfnd.ttf");
 }
 .Profile {
   width: 500px;
@@ -45,8 +45,8 @@
 }
 
 .Profile .title {
-  /* font-family: formFont; */
-  font-family: "Noto Serif", serif;
+  font-family: formFont;
+  /* font-family: "Noto Serif", serif; */
   font-weight: bold;
   font-size: .95rem;
 }
