@@ -2,7 +2,7 @@ const passport = require("passport");
 const users = require("../models/users");
 const questions = require("../models/questions");
 const { checkauthentication } = require("../middleware/users");
-const { checkAdminAuthentication } = require("../middleware/users");
+const { checkAdminAuthentication,checkSuperAdminAuthentication } = require("../middleware/users");
 const { success, warning, error } = require("../services/chalk");
 
 // QUESTIONS //
@@ -17,6 +17,7 @@ module.exports = (app) => {
     "/api/questionsadd",
     checkauthentication,
     checkAdminAuthentication,
+    checkSuperAdminAuthentication,
     async (req, res) => {
       if (req.body.type === "range") req.body.options = [0, 0];
       const question = await questions.create({
@@ -35,6 +36,7 @@ module.exports = (app) => {
     "/api/questionsupdate",
     checkauthentication,
     checkAdminAuthentication,
+    checkSuperAdminAuthentication,
     async (req, res) => {
       console.log(
         warning("The object is being updated:"),
@@ -62,6 +64,7 @@ module.exports = (app) => {
     "/api/questionsdelete",
     checkauthentication,
     checkAdminAuthentication,
+    checkSuperAdminAuthentication,
     async (req, res) => {
       console.log(warning("The questoins has to be deleted:"), req.body.id);
       const question = await questions.findByIdAndDelete(

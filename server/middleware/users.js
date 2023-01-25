@@ -17,5 +17,14 @@ function checkAdminAuthentication(req, res, next) {
     res.json({ error: "You Are Not Authorized to access this page." });
   }
 }
+function checkSuperAdminAuthentication(req, res, next) {
+  // console.log(warning("checking if user is an admin : "), req.user);
+  if (req.user.isSuperAdmin) {
+    //req.isAuthenticated() will return true if user is logged in
+    next();
+  } else {
+    res.json({ error: "You Are Not Authorized to access this page." });
+  }
+}
 
-module.exports = { checkauthentication, checkAdminAuthentication };
+module.exports = { checkauthentication, checkAdminAuthentication,checkSuperAdminAuthentication };

@@ -52,7 +52,7 @@
   text-decoration: none;
   color: #dfdede;
   font-family: formFont;
-  font-size: 13px;
+  font-size: 19px;
   width: 95%;
   height: 100%;
   display: flex;
@@ -95,7 +95,7 @@
   display: block;
   height: 5px;
   width: 50px;
-  background: #a49d9d;
+  background: #d0cdcd;
   margin: 10px auto;
 }
 
@@ -113,7 +113,7 @@
 
 .Navbar .con:hover .bar,
 .special-con:hover .bar {
-  background-color: #a49d9d;
+  background-color: #d0cdcd;
 }
 
 .Navbar .col {
