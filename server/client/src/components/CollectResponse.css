@@ -1,3 +1,8 @@
+@font-face {
+  font-family: formFont;
+  src: url("fonts/Game of Thrones.ttf");
+}
+
 .collect-response .image {
   max-width: 40vw;
   max-height: 35vh;
@@ -9,19 +14,19 @@
 .collect-response .submitted {
   padding: 30px;
   border-radius: 11px;
-  font-family: "Marcellus", serif;
-  font-size: 1.2rem;
+  font-family: formFont;
+  font-size: .8rem;
 }
 
 @media only screen and (min-width: 453px) {
   .collect-response .submitted {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 }
 
 @media only screen and (max-width: 382px) {
   .collect-response .submitted {
-    font-size: 0.9rem;
+    font-size: 0.5rem;
   }
 }
 

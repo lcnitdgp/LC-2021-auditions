@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: auditionFont;
-  src: url("fonts/Hodor.ttf");
+  src: url("fonts/Kingdom Regular.ttf");
 }
 
-/* .test {
+.test {
   animation: squiggly-anim 0.34s linear infinite;
-} */
+}
 .test {
   display: inline-block;
   vertical-align: middle;
@@ -15,7 +15,7 @@
   outline: none;
   text-align: center;
   line-height: 1.5;
-  font-size: 5.45rem;
+  font-size: 7.45rem;
   font-family: auditionFont;
   font-weight: bolder;
   color: #fff8e4;
@@ -113,5 +113,5 @@ p {
   /* background-image: linear-gradient(#ffe470, #a56600);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
-  color: #a49d9d;
+  color: #c6c3c3;
 }

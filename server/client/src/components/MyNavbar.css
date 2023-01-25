@@ -8,7 +8,7 @@
   flex-direction: row-reverse;
 }
 .Navbar .image {
-  height: 65px;
+  height: 45px;
 }
 @media only screen and (max-width: 500px) {
   .Navbar .image {

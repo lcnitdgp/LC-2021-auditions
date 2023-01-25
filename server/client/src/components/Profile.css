@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Benne&display=swap");
-
+@font-face {
+  font-family: formFont;
+  src: url("fonts/Game of Thrones.ttf");
+}
 .Profile {
   width: 500px;
 }
@@ -42,9 +45,9 @@
 }
 
 .Profile .title {
-  font-family: "Benne", serif;
+  font-family: formFont;
   font-weight: bold;
-  font-size: 1.05rem;
+  font-size: .95rem;
 }
 
 @media (min-width: 768px) {
