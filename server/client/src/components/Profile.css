@@ -1,12 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Benne&display=swap");
 @font-face {
   font-family: formFont;
-  src: url("fonts/ramsfnd.ttf");
+  src: url("fonts/RomandeADFStyleStd-DemiBold.otf");
+}
+@font-face {
+  font-family: answerFont;
+  src: url("fonts/RomandeADFStd-Regular.otf");
 }
 .Profile {
   width: 500px;
 }
-
+.custom-range{
+  color: black
+}
 .button-edit .btn {
   width: 100%;
   color: #a49d9d;
