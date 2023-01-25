@@ -33,6 +33,7 @@
   position: relative;
   top: 2px;
   font-weight: bold;
+  font-family: formFont;
 }
 
 .wrap .btn:before {
