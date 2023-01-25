@@ -50,8 +50,9 @@
 
 .Navbar .nav-text a {
   text-decoration: none;
-  color: #a49d9d;
-  font-size: 18px;
+  color: #dfdede;
+  font-family: formFont;
+  font-size: 13px;
   width: 95%;
   height: 100%;
   display: flex;
@@ -243,6 +244,7 @@
 .Navbar .nav-image-name {
   margin-top: 13px;
   color: #a49d9d;
+  font-family: formFont;
   font-weight: bold;
   text-align: center;
 }

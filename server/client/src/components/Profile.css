@@ -45,7 +45,8 @@
 }
 
 .Profile .title {
-  font-family: formFont;
+  /* font-family: formFont; */
+  font-family: "Noto Serif", serif;
   font-weight: bold;
   font-size: .95rem;
 }

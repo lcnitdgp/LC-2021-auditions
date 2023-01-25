@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: auditionFont;
-  src: url("fonts/Kingdom Regular.ttf");
+  src: url("fonts/Hodor.ttf");
 }
 
-.test {
+/* .test {
   animation: squiggly-anim 0.34s linear infinite;
-}
+} */
 .test {
   display: inline-block;
   vertical-align: middle;
@@ -15,7 +15,7 @@
   outline: none;
   text-align: center;
   line-height: 1.5;
-  font-size: 7.45rem;
+  font-size: 5rem;
   font-family: auditionFont;
   font-weight: bolder;
   color: #fff8e4;

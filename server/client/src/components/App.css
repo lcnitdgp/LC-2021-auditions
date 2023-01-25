@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital@1&family=Noto+Serif:ital@1&display=swap");
-
+@font-face {
+  font-family: formFont;
+  src: url("fonts/Game of Thrones.ttf");
+}
 .App {
   max-height: 100vh;
   overflow: hidden;
@@ -146,7 +149,7 @@
   border-color: transparent !important;
   outline: 0 !important;
   box-shadow: transparent !important;
-  border-bottom: 2px solid #bfa55d !important;
+  border-bottom: 2px solid #282727 !important;
   box-shadow: 0 0 0 0 transparent !important;
 }
 
@@ -233,5 +236,7 @@ input[type="range"]:focus::-webkit-slider-runnable-track {
 
 .form-label {
   font-family: "Noto Serif", serif;
+  /* font-family: formFont; */
+  letter-spacing: 1px;
   font-size: 1rem;
 }
