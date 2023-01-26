@@ -165,6 +165,7 @@
 
 input[type="range"] {
   -webkit-appearance: none;
+  color:rgb(6, 6, 6);
 }
 
 /* change color of slider */

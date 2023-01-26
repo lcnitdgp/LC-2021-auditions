@@ -14,6 +14,7 @@ class RenderAdminForm extends Component {
   render() {
     console.log("Render admin form.");
     return (
+      
       <Container style={{maxWidth:'700px'}}>
         <div class="render-admin-form">
             <AddFormElements />
