@@ -190,7 +190,7 @@ input[type="range"] {
  */
 
 input[type="range"]::-webkit-slider-runnable-track {
-  background: #a49d9d !important;
+  background: #6c6c6c !important;
   border: none;
   border-radius: 3px;
   height: 5px;
@@ -202,7 +202,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  background: #a49d9d;
+  background: #272626;
   margin-top: -4px;
 }
 
@@ -211,7 +211,7 @@ input[type="range"]:focus {
 }
 
 input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: #a49d9d;
+  background: #121111;
 }
 
 /*IE & Edge thumb*/
