@@ -22,6 +22,8 @@ mongoose.connect(MONGO_URL, {
   useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true,
+}).then(()=>{
+  console.log("connected to the database succeessfully")
 });
 
 // Use this after the variable declaration
