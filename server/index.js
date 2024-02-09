@@ -26,7 +26,7 @@ mongoose.connect(MONGO_URL, {
 
 // Use this after the variable declaration
 // allow cookies to be passed from frontend url
-app.use(cors({ credentials: true, origin: process.env.FRONTEND }));
+app.use(cors({ credentials: true, origin: "*" }));
 
 //middleware
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
