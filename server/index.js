@@ -10,14 +10,16 @@ const chalk = require("chalk");
 // import the environment variables
 require("dotenv").config();
 
-const PORT = process.env.PORT || 5001;
+
+
+const PORT = process.env.PORT || 5000;
 
 var passport = require("passport");
 require("./passport/passportgoogle")(passport);
 
 const MONGO_URL = process.env.MONGO;
 
-mongoose.connect(MONGO_URL, {
+mongoose.connect('mongodb+srv://ankitpratap04:ankitpapa@cluster0.pkvjlgv.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -28,7 +30,12 @@ mongoose.connect(MONGO_URL, {
 
 // Use this after the variable declaration
 // allow cookies to be passed from frontend url
-app.use(cors({ credentials: true, origin: "*" }));
+const corsOptions = {
+  origin: 'http://localhost:3000',
+};
+
+// Enable CORS with the specified options
+app.use(cors(corsOptions));
 
 //middleware
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
@@ -73,6 +80,6 @@ require("./routes/questions")(app);
 //   });
 // }
 
-app.listen(PORT, () => {
+app.listen(5000, () => {
   console.log("The server is active on :", PORT);
 });
